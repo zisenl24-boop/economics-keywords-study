@@ -62,14 +62,16 @@ const keywords = {
 
 };
 
-};function searchKeyword() {
+function searchKeyword() {
 
     const input =
         document.getElementById("searchInput").value;
 
     loadKeyword(input);
 
-}function loadKeyword(word) {
+}
+
+function loadKeyword(word) {
 
     const result =
         document.getElementById("result");
@@ -103,6 +105,22 @@ const keywords = {
 
         <p>
             ${item.definition}
+        </p>
+
+        <h3 class="section-title">
+            例
+        </h3>
+
+        <p>
+            ${item.example}
+        </p>
+
+        <h3 class="section-title">
+            関連用語
+        </h3>
+
+        <p>
+            ${item.related}
         </p>
 
     </div>
