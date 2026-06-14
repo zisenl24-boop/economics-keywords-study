@@ -1,156 +1,73 @@
-const graph = {
-  "GDP": { def:"国内生产总值，是经济总量指标", links:["CPI","インフレ","消費"] },
-  "CPI": { def:"物价指数，用于衡量通胀", links:["インフレ","GDP"] },
-  "インフレ": { def:"物价持续上涨现象", links:["CPI","金融政策"] },
-  "失業率": { def:"失业人口比例", links:["GDP"] },
-  "金融政策": { def:"央行调控经济手段", links:["金利"] },
-  "金利": { def:"利率水平", links:["投資"] },
-  "投資": { def:"资本投入行为", links:["GDP"] },
-  "消費": { def:"消费行为", links:["GDP"] },
-  "貿易": { def:"国家间交易", links:["為替"] },
-  "為替": { def:"货币兑换比率", links:["貿易"] }
-};
+const keywords = {
+  "GDP": {
+    definition: "国内総生産。一定期間内に生産された財・サービスの総価値。",
+    example: "日本の経済規模を示す指標。",
+    related: "CPI、インフレ"
+  },
 
-// 🔍 搜索
-function searchWord(w){
-  const word = w || document.getElementById("searchInput").value;
-  const box = document.getElementById("resultBox");
+  "CPI": {
+    definition: "消費者物価指数。物価水準の変化を示す指標。",
+    example: "インフレ率の計算に使われる。",
+    related: "インフレ、生活コスト"
+  },
 
-  const key = Object.keys(graph).find(k=>k===word||word.includes(k));
+  "インフレ": {
+    definition: "物価が継続的に上昇する現象。",
+    example: "パンの値段が毎年上がる。",
+    related: "CPI、金融政策"
+  },
 
-  if(!key){
-    box.innerHTML="見つかりません";
-    return;
+  "デフレ": {
+    definition: "物価が継続的に下落する現象。",
+    example: "商品価格が長期的に下がる。",
+    related: "インフレ"
+  },
+
+  "失業率": {
+    definition: "労働人口のうち失業者の割合。",
+    example: "景気判断の重要指標。",
+    related: "GDP"
+  },
+
+  "金利": {
+    definition: "お金を借りる際の利息の割合。",
+    example: "住宅ローン金利。",
+    related: "金融政策"
+  },
+
+  "金融政策": {
+    definition: "中央銀行が景気や物価を調整する政策。",
+    example: "利上げ・利下げ。",
+    related: "金利"
+  },
+
+  "為替レート": {
+    definition: "異なる通貨の交換比率。",
+    example: "1ドル＝150円。",
+    related: "円高、円安"
+  },
+
+  "円高": {
+    definition: "円の価値が上昇すること。",
+    example: "輸入が安くなる。",
+    related: "為替レート"
+  },
+
+  "円安": {
+    definition: "円の価値が下落すること。",
+    example: "輸出が有利になる。",
+    related: "為替レート"
+  },
+
+  "貿易": {
+    definition: "国と国の間の商品・サービスの取引。",
+    example: "輸出・輸入。",
+    related: "経済"
+  },
+
+  "需要": {
+    definition: "商品を買いたいという欲求。",
+    example: "人気商品の需要増加。",
+    related: "供給"
   }
-
-  const d = graph[key];
-
-  box.innerHTML=`
-    <h3>${key}</h3>
-    <p>${d.def}</p>
-    <button onclick="openGraph('${key}')">ネットワーク</button>
-  `;
-}
-
-function quickSearch(w){
-  document.getElementById("searchInput").value=w;
-  searchWord(w);
-}
-
-// 🧠 graph
-function openGraph(center){
-  const box=document.getElementById("graph");
-  const d=graph[center];
-
-  let html=`<div class="net-center">${center}</div><div class="net-wrap">`;
-
-  d.links.forEach(l=>{
-    html+=`<div class="net-node" onclick="searchWord('${l}')">${l}</div>`;
-  });
-
-  html+="</div>";
-  box.innerHTML=html;
-}
-
-// ⭐ favorites
-function addFavorite(w){
-  let f=JSON.parse(localStorage.getItem("fav")||"[]");
-  if(!f.includes(w)) f.push(w);
-  localStorage.setItem("fav",JSON.stringify(f));
-  renderFav();
-}
-
-function renderFav(){
-  let f=JSON.parse(localStorage.getItem("fav")||"[]");
-  document.getElementById("favorites").innerHTML=
-    f.map(x=>`<li>${x}</li>`).join("");
-}
-
-// 📜 history
-function addHistory(w){
-  let h=JSON.parse(localStorage.getItem("his")||"[]");
-  h.unshift(w);
-  localStorage.setItem("his",JSON.stringify(h));
-  renderHis();
-}
-
-function renderHis(){
-  let h=JSON.parse(localStorage.getItem("his")||"[]");
-  document.getElementById("historyList").innerHTML=
-    h.map(x=>`<li>${x}</li>`).join("");
-}
-
-function clearHistory(){
-  localStorage.removeItem("his");
-  renderHis();
-}
-
-// 💬 AI聊天（修复版）
-let chatHistory = [];
-
-function addMsg(role,text){
-  const box=document.getElementById("chatBox");
-  const div=document.createElement("div");
-  div.className="msg "+role;
-
-  const b=document.createElement("div");
-  b.className="bubble";
-  b.innerHTML=text;
-
-  div.appendChild(b);
-  box.appendChild(div);
-  box.scrollTop=box.scrollHeight;
-}
-
-function sendChat(){
-  const input=document.getElementById("chatInput");
-  const text=input.value.trim();
-  if(!text)return;
-
-  addMsg("user",text);
-  input.value="";
-
-  setTimeout(()=>{
-
-    let reply = null;
-
-    // 🧠 精准匹配
-    for(let k in graph){
-      if(text.includes(k)){
-        reply = `
-          <b>${k}</b><br><br>
-          ${graph[k].def}<br><br>
-          👉 関連：${graph[k].links.join("、")}
-        `;
-        break;
-      }
-    }
-
-    // 🧠 fallback（关键修复）
-    if(!reply){
-      if(text.includes("とは")){
-        reply="この用語をもう少し具体的に入力してください（例：GDPとは）";
-      }
-      else if(text.includes("経済")){
-        reply="経済はGDP・物価・雇用などから構成されます";
-      }
-      else{
-        reply="もう少し具体的に質問してください（例：GDPとは、インフレとは）";
-      }
-    }
-
-    addMsg("bot",reply);
-
-  },600);
-}
-
-// init
-document.addEventListener("DOMContentLoaded",()=>{
-  renderFav();
-  renderHis();
-
-  document.getElementById("chatInput")
-  .addEventListener("keydown",e=>{
-    if(e.key==="Enter")sendChat();
-  });
-});
+};
