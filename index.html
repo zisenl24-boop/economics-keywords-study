@@ -1,124 +1,76 @@
-<section class="card">
-    <h2>📚 今日の経済用語</h2>
-    <p id="dailyWord"></p>
-</section>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Economics Keyword App</title>
+<link rel="stylesheet" href="style.css">
+</head>
 
-<section class="card">
-    <h2>🔍 キーワード検索</h2>
+<body>
 
-    <input
-        type="text"
-        id="searchInput"
-        placeholder="GDP・CPI・円安・WTO..."
-    >
+<header>
+    <h1>経済学キーワード辞典</h1>
+    <p>GDP・インフレ・CPI・金融政策をわかりやすく学ぶ</p>
+</header>
 
-    <button onclick="searchKeyword()">
-        検索
-    </button>
+<div class="container">
+
+<!-- 搜索区 -->
+<div class="card">
+    <h2>キーワード検索</h2>
+
+    <input id="searchInput" placeholder="例：GDP、インフレ、CPI">
+    <button onclick="searchWord()">検索</button>
 
     <div class="popular">
-        <span onclick="loadKeyword('GDP')">GDP</span>
-        <span onclick="loadKeyword('CPI')">CPI</span>
-        <span onclick="loadKeyword('インフレ')">インフレ</span>
-        <span onclick="loadKeyword('デフレ')">デフレ</span>
-        <span onclick="loadKeyword('為替レート')">為替レート</span>
-        <span onclick="loadKeyword('円安')">円安</span>
-        <span onclick="loadKeyword('円高')">円高</span>
-        <span onclick="loadKeyword('WTO')">WTO</span>
-        <span onclick="loadKeyword('FTA')">FTA</span>
-        <span onclick="loadKeyword('比較優位')">比較優位</span>
+        <span onclick="quickSearch('GDP')">GDP</span>
+        <span onclick="quickSearch('CPI')">CPI</span>
+        <span onclick="quickSearch('インフレ')">インフレ</span>
+        <span onclick="quickSearch('失業率')">失業率</span>
     </div>
+</div>
 
-</section>
+<!-- 结果 -->
+<div class="card" id="resultBox">
+    <p class="notfound">検索結果がここに表示されます</p>
+</div>
 
-<section id="result"></section>
+<!-- Concept Map -->
+<div class="card">
+    <h2>Concept Map</h2>
 
-<section class="card">
-    <h2>🧠 国際経済の概念関係図</h2>
+    <div class="concept-map">
+        <div class="concept-card">GDP</div>
+        <div class="concept-card">消費</div>
+        <div class="concept-card">投資</div>
+        <div class="concept-card">失業率</div>
+        <div class="concept-card">CPI</div>
+        <div class="concept-card">インフレ</div>
+        <div class="concept-card">金融政策</div>
+        <div class="concept-card">国際貿易</div>
+    </div>
+</div>
 
-    <pre>
-GDP
-↓
-経済成長
-↓
-雇用増加
+<!-- 分类 -->
+<div class="card">
+    <h2>カテゴリ</h2>
 
+    <div class="category-grid">
+        <div class="category-card">📈 マクロ経済</div>
+        <div class="category-card">💰 金融</div>
+        <div class="category-card">🌏 国際経済</div>
+        <div class="category-card">🏭 ミクロ経済</div>
+    </div>
+</div>
 
-CPI
-↓
-インフレ
-↓
-物価上昇
-
-
-為替レート
-↓
-円安
-↓
-輸出増加
-
-
-為替レート
-↓
-円高
-↓
-輸入増加
-
-
-WTO
-↓
-自由貿易
-↓
-FTA
-
-
-比較優位
-↓
-国際分業
-↓
-貿易拡大
-
-
-FDI
-↓
-海外投資
-↓
-グローバル化
-    </pre>
-
-</section>
-
-<section class="card">
-    <h2>📚 国際経済キーワード分類</h2>
-
-    <pre>
-国際経済
-│
-├── 経済指標
-│   ├── GDP
-│   ├── CPI
-│   ├── インフレ
-│   └── デフレ
-│
-├── 為替
-│   ├── 為替レート
-│   ├── 円安
-│   └── 円高
-│
-├── 貿易
-│   ├── WTO
-│   ├── FTA
-│   └── 比較優位
-│
-└── 国際金融
-    ├── IMF
-    ├── FDI
-    └── 世界銀行
-    </pre>
-
-</section>
-
-<section class="card">
-    <h2>⭐ お気に入り</h2>
+<!-- 收藏 -->
+<div class="card">
+    <h2>お気に入り</h2>
     <ul id="favorites"></ul>
-</section>
+</div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
