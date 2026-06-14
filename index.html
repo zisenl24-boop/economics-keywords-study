@@ -15,7 +15,9 @@
 
 <div class="container">
 
-<!-- 搜索区 -->
+<!-- =========================
+🔍 搜索区
+========================= -->
 <div class="card">
     <h2>キーワード検索</h2>
 
@@ -30,28 +32,44 @@
     </div>
 </div>
 
-<!-- 结果 -->
+<!-- =========================
+📊 搜索结果
+========================= -->
 <div class="card" id="resultBox">
     <p class="notfound">検索結果がここに表示されます</p>
 </div>
 
-<!-- Concept Map -->
+<!-- =========================
+🧠 Concept Map（可点击升级版）
+========================= -->
 <div class="card">
     <h2>Concept Map</h2>
 
     <div class="concept-map">
-        <div class="concept-card">GDP</div>
-        <div class="concept-card">消費</div>
-        <div class="concept-card">投資</div>
-        <div class="concept-card">失業率</div>
-        <div class="concept-card">CPI</div>
-        <div class="concept-card">インフレ</div>
-        <div class="concept-card">金融政策</div>
-        <div class="concept-card">国際貿易</div>
+
+        <div class="concept-card" onclick="searchWord('GDP')">GDP</div>
+        <div class="concept-card" onclick="searchWord('消費')">消費</div>
+        <div class="concept-card" onclick="searchWord('投資')">投資</div>
+        <div class="concept-card" onclick="searchWord('失業率')">失業率</div>
+        <div class="concept-card" onclick="searchWord('CPI')">CPI</div>
+        <div class="concept-card" onclick="searchWord('インフレ')">インフレ</div>
+        <div class="concept-card" onclick="searchWord('金融政策')">金融政策</div>
+        <div class="concept-card" onclick="searchWord('国際貿易')">国際貿易</div>
+
     </div>
 </div>
 
-<!-- 分类 -->
+<!-- =========================
+🧠 知识网络（对应 script.js 的 openGraph）
+========================= -->
+<div class="card">
+    <h2>🧠 関係ネットワーク</h2>
+    <div id="graph"></div>
+</div>
+
+<!-- =========================
+📂 分类
+========================= -->
 <div class="card">
     <h2>カテゴリ</h2>
 
@@ -63,21 +81,41 @@
     </div>
 </div>
 
-<!-- 收藏 -->
+<!-- =========================
+⭐ 收藏
+========================= -->
 <div class="card">
     <h2>お気に入り</h2>
     <ul id="favorites"></ul>
 </div>
 
-<!-- 搜索历史 -->
+<!-- =========================
+📜 历史记录
+========================= -->
 <div class="card">
     <h2>検索履歴</h2>
     <ul id="historyList"></ul>
     <button class="clear-btn" onclick="clearHistory()">履歴をクリア</button>
 </div>
 
+<!-- =========================
+💬 ChatGPT风格对话系统（核心）
+========================= -->
+<div class="card">
+    <h2>💬 経済AIチャット</h2>
+
+    <div id="chatBox" class="chat-box"></div>
+
+    <div class="chat-input-area">
+        <input id="chatInput" placeholder="例：GDPとは？">
+        <button onclick="sendChat()">送信</button>
+    </div>
 </div>
 
+</div>
+
+<!-- JS -->
 <script src="script.js"></script>
+
 </body>
 </html>
