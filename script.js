@@ -315,36 +315,34 @@ function escapeHTML(text){
 function findKeyword(input){
     const word = String(input || "")
         .trim()
+        .replace(/\s+/g, "")
         .toLowerCase();
 
     const keys = Object.keys(keywords);
 
-    // 1. 完全匹配（最高优先级）
-    const exact = keys.find(k =>
-        k.toLowerCase() === word
-    );
-    if(exact) return exact;
+    // 完全匹配
+    for(const key of keys){
+        if(key.toLowerCase() === word){
+            return key;
+        }
+    }
 
-    // 2. 包含匹配（核心模糊搜索）
-    const includes = keys.find(k =>
-        k.toLowerCase().includes(word) ||
-        word.includes(k.toLowerCase())
-    );
-    if(includes) return includes;
+    // 包含匹配
+    for(const key of keys){
+        if(key.toLowerCase().includes(word)){
+            return key;
+        }
+    }
 
-    // 3. 分词匹配（增强）
-    const splitMatch = keys.find(k => {
-        const keyLower = k.toLowerCase();
-        return word.split(" ").some(part =>
-            keyLower.includes(part)
-        );
-    });
-
-    if(splitMatch) return splitMatch;
+    // 反向包含
+    for(const key of keys){
+        if(word.includes(key.toLowerCase())){
+            return key;
+        }
+    }
 
     return null;
 }
-
 
 function createNewsSearchUrl(word, title){
     const query = encodeURIComponent(`${word} ${title}`);
