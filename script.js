@@ -232,6 +232,180 @@ const keywords = {
     definition: "デジタル技術による業務改革。",
     example: "オンライン化。",
     related: "イノベーション"
+  },
+
+  "GNP": {
+    definition: "国民総生産。国民が生産した財・サービスの総価値。",
+    example: "海外での生産活動も含まれる。",
+    related: "GDP"
+  },
+
+  "PPI": {
+    definition: "生産者物価指数。企業間取引価格の変化を示す指標。",
+    example: "原材料価格の上昇を反映する。",
+    related: "CPI、インフレ"
+  },
+
+  "好景気": {
+    definition: "経済活動が活発な状態。",
+    example: "企業収益や雇用が増加する。",
+    related: "不景気、GDP"
+  },
+
+  "不景気": {
+    definition: "経済活動が停滞している状態。",
+    example: "企業収益や消費が減少する。",
+    related: "失業率、景気"
+  },
+
+  "完全雇用": {
+    definition: "働く意思のある人がほぼ全員働ける状態。",
+    example: "失業率が非常に低い。",
+    related: "失業率"
+  },
+
+  "経済成長率": {
+    definition: "経済規模がどれだけ成長したかを示す割合。",
+    example: "前年比3％成長。",
+    related: "GDP"
+  },
+
+  "実質GDP": {
+    definition: "物価変動の影響を除いたGDP。",
+    example: "経済成長の実態を把握できる。",
+    related: "名目GDP"
+  },
+
+  "名目GDP": {
+    definition: "物価変動を含めて計算したGDP。",
+    example: "現在価格で算出される。",
+    related: "実質GDP"
+  },
+
+  "生産性": {
+    definition: "投入した資源に対する成果の割合。",
+    example: "労働生産性の向上。",
+    related: "経済成長"
+  },
+
+  "量的緩和": {
+    definition: "中央銀行が市場へ大量の資金を供給する政策。",
+    example: "景気刺激策として実施される。",
+    related: "金融政策"
+  },
+
+  "利上げ": {
+    definition: "政策金利を引き上げること。",
+    example: "インフレ抑制に利用される。",
+    related: "金利"
+  },
+
+  "利下げ": {
+    definition: "政策金利を引き下げること。",
+    example: "景気刺激に利用される。",
+    related: "金利"
+  },
+
+  "マネーサプライ": {
+    definition: "市場に流通するお金の総量。",
+    example: "中央銀行が管理する。",
+    related: "金融政策"
+  },
+
+  "政府支出": {
+    definition: "政府が行う公共サービスや事業への支出。",
+    example: "公共事業費。",
+    related: "財政政策"
+  },
+
+  "補助金": {
+    definition: "政府が特定の活動を支援するために支給する資金。",
+    example: "農業補助金。",
+    related: "財政政策"
+  },
+
+  "貿易収支": {
+    definition: "輸出額と輸入額の差額。",
+    example: "黒字または赤字となる。",
+    related: "輸出、輸入"
+  },
+
+  "経常収支": {
+    definition: "貿易や投資収益を含む国際収支。",
+    example: "日本は黒字国であることが多い。",
+    related: "貿易収支"
+  },
+
+  "FTA": {
+    definition: "自由貿易協定。",
+    example: "加盟国間の関税を削減する。",
+    related: "自由貿易"
+  },
+
+  "WTO": {
+    definition: "世界貿易機関。",
+    example: "国際貿易ルールを管理する。",
+    related: "自由貿易"
+  },
+
+  "グローバル化": {
+    definition: "国境を越えた経済活動の拡大。",
+    example: "多国籍企業の増加。",
+    related: "国際貿易"
+  },
+
+  "比較優位": {
+    definition: "他国より効率よく生産できる分野に特化する考え方。",
+    example: "国際分業の基礎理論。",
+    related: "国際分業"
+  },
+
+  "需要曲線": {
+    definition: "価格と需要量の関係を示す曲線。",
+    example: "価格が上がると需要は減少する。",
+    related: "需要"
+  },
+
+  "供給曲線": {
+    definition: "価格と供給量の関係を示す曲線。",
+    example: "価格が上がると供給は増加する。",
+    related: "供給"
+  },
+
+  "均衡価格": {
+    definition: "需要と供給が一致する価格。",
+    example: "市場均衡で成立する。",
+    related: "市場均衡"
+  },
+
+  "消費者余剰": {
+    definition: "消費者が得る利益の大きさ。",
+    example: "安く購入できた時に生じる。",
+    related: "需要"
+  },
+
+  "生産者余剰": {
+    definition: "生産者が得る利益の大きさ。",
+    example: "高く販売できた時に生じる。",
+    related: "供給"
+  },
+
+  "代替財": {
+    definition: "互いに代わりとして利用できる商品。",
+    example: "コーヒーと紅茶。",
+    related: "需要"
+  },
+
+  "補完財": {
+    definition: "一緒に利用される商品。",
+    example: "スマホと充電器。",
+    related: "需要"
+  },
+
+  "市場失敗": {
+    definition: "市場メカニズムだけでは効率的な結果が得られない状態。",
+    example: "環境汚染問題。",
+    related: "政府介入"
   }
 };
 
