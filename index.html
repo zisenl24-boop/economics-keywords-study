@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国際経済キーワード検索 - ニュースで学ぶ経済学</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🌍 国際経済キーワード検索</h1>
+    <p>ニュースで学ぶ経済学</p>
+</header>
+
+<div class="container">
+
+```
+<section class="card">
+    <h2>📚 今日の経済用語</h2>
+    <p id="dailyWord"></p>
+</section>
+
+<section class="card">
+    <h2>🔍 キーワード検索</h2>
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="GDP・CPI・円安・WTO..."
+    >
+
+    <button onclick="searchKeyword()">
+        検索
+    </button>
+
+    <div class="popular">
+        <span onclick="loadKeyword('GDP')">GDP</span>
+        <span onclick="loadKeyword('CPI')">CPI</span>
+        <span onclick="loadKeyword('為替レート')">為替レート</span>
+        <span onclick="loadKeyword('円安')">円安</span>
+        <span onclick="loadKeyword('比較優位')">比較優位</span>
+        <span onclick="loadKeyword('WTO')">WTO</span>
+    </div>
+
+</section>
+
+<section id="result"></section>
+
+<section class="card">
+    <h2>⭐ お気に入り</h2>
+    <ul id="favorites"></ul>
+</section>
+```
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
