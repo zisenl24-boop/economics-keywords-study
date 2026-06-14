@@ -281,7 +281,7 @@ const keywords = {
   example: "独占・外部性。",
   related: "政府介入"
 }
-
+const newsCases = {};
 };
 
 const FAVORITE_KEY = "fav";
