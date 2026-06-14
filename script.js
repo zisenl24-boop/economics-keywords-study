@@ -1,19 +1,17 @@
 const graph = {
-  "GDP": { def:"国内生产总值指标", links:["CPI","インフレ","消費"] },
-  "CPI": { def:"物价指数", links:["インフレ","GDP"] },
-  "インフレ": { def:"物价上升", links:["CPI","金融政策"] },
-  "デフレ": { def:"物价下降", links:["インフレ"] },
-  "失業率": { def:"失业比例", links:["GDP"] },
-  "金融政策": { def:"央行调控", links:["金利"] },
-  "金利": { def:"利率", links:["投資"] },
-  "投資": { def:"投资行为", links:["GDP"] },
+  "GDP": { def:"国内生产总值，是经济总量指标", links:["CPI","インフレ","消費"] },
+  "CPI": { def:"物价指数，用于衡量通胀", links:["インフレ","GDP"] },
+  "インフレ": { def:"物价持续上涨现象", links:["CPI","金融政策"] },
+  "失業率": { def:"失业人口比例", links:["GDP"] },
+  "金融政策": { def:"央行调控经济手段", links:["金利"] },
+  "金利": { def:"利率水平", links:["投資"] },
+  "投資": { def:"资本投入行为", links:["GDP"] },
   "消費": { def:"消费行为", links:["GDP"] },
-  "貿易": { def:"国际贸易", links:["為替"] },
-  "為替": { def:"汇率", links:["貿易"] },
-  "景気": { def:"经济状态", links:["GDP"] }
+  "貿易": { def:"国家间交易", links:["為替"] },
+  "為替": { def:"货币兑换比率", links:["貿易"] }
 };
 
-// 🔍 search
+// 🔍 搜索
 function searchWord(w){
   const word = w || document.getElementById("searchInput").value;
   const box = document.getElementById("resultBox");
@@ -54,7 +52,7 @@ function openGraph(center){
   box.innerHTML=html;
 }
 
-// ⭐ fav
+// ⭐ favorites
 function addFavorite(w){
   let f=JSON.parse(localStorage.getItem("fav")||"[]");
   if(!f.includes(w)) f.push(w);
@@ -87,8 +85,8 @@ function clearHistory(){
   renderHis();
 }
 
-// 💬 chat AI
-let chatHistory=[];
+// 💬 AI聊天（修复版）
+let chatHistory = [];
 
 function addMsg(role,text){
   const box=document.getElementById("chatBox");
@@ -114,12 +112,30 @@ function sendChat(){
 
   setTimeout(()=>{
 
-    let reply="もう少し具体的に教えてください";
+    let reply = null;
 
+    // 🧠 精准匹配
     for(let k in graph){
       if(text.includes(k)){
-        reply=graph[k].def;
+        reply = `
+          <b>${k}</b><br><br>
+          ${graph[k].def}<br><br>
+          👉 関連：${graph[k].links.join("、")}
+        `;
         break;
+      }
+    }
+
+    // 🧠 fallback（关键修复）
+    if(!reply){
+      if(text.includes("とは")){
+        reply="この用語をもう少し具体的に入力してください（例：GDPとは）";
+      }
+      else if(text.includes("経済")){
+        reply="経済はGDP・物価・雇用などから構成されます";
+      }
+      else{
+        reply="もう少し具体的に質問してください（例：GDPとは、インフレとは）";
       }
     }
 
