@@ -14,34 +14,45 @@ header{
 background:#1f4e79;
 color:white;
 text-align:center;
-padding:30px;
+padding:50px 20px;
 }
 
 header h1{
-margin-bottom:10px;
+font-size:72px;
+font-weight:900;
+letter-spacing:3px;
+margin-bottom:15px;
+}
+
+header p{
+font-size:24px;
+opacity:0.9;
 }
 
 .container{
-max-width:1000px;
-margin:20px auto;
-padding:10px;
+max-width:1100px;
+margin:30px auto;
+padding:15px;
 }
 
 .card{
 background:white;
-border-radius:12px;
-padding:20px;
-margin-bottom:20px;
-box-shadow:0 2px 8px rgba(0,0,0,0.08);
+border-radius:15px;
+padding:25px;
+margin-bottom:25px;
+box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
 .card h2{
+text-align:center;
 color:#1f4e79;
-margin-bottom:15px;
+margin-bottom:20px;
+font-size:28px;
 }
 
 .card p{
 line-height:1.8;
+font-size:16px;
 }
 
 input{
@@ -68,15 +79,17 @@ opacity:0.9;
 
 .popular{
 margin-top:15px;
+text-align:center;
 }
 
 .popular span{
 display:inline-block;
 background:#e8eef7;
-padding:8px 12px;
+padding:10px 15px;
 border-radius:20px;
-margin:5px;
+margin:6px;
 cursor:pointer;
+font-weight:bold;
 }
 
 .popular span:hover{
@@ -86,12 +99,15 @@ opacity:0.85;
 .keyword-title{
 color:#1f4e79;
 margin-bottom:15px;
+text-align:center;
+font-size:36px;
 }
 
 .section-title{
 margin-top:20px;
 margin-bottom:10px;
 color:#1f4e79;
+font-size:22px;
 }
 
 .related-tag{
@@ -108,33 +124,6 @@ cursor:pointer;
 opacity:0.85;
 }
 
-.news-box{
-background:#fff7e6;
-border-left:5px solid #f39c12;
-padding:15px;
-margin-top:10px;
-}
-
-.graph{
-text-align:center;
-margin-top:15px;
-line-height:2;
-font-weight:bold;
-}
-
-.quiz-box{
-background:#eef8ff;
-padding:15px;
-border-radius:10px;
-margin-top:15px;
-}
-
-.answer{
-margin-top:10px;
-color:#c0392b;
-font-weight:bold;
-}
-
 .favorite-btn{
 background:#f39c12;
 margin-top:15px;
@@ -149,37 +138,16 @@ background:white;
 padding:20px;
 border-radius:10px;
 text-align:center;
+font-size:18px;
 }
 
 pre{
 white-space:pre-wrap;
-line-height:1.8;
-font-size:15px;
+line-height:2;
+font-size:17px;
 font-family:“Segoe UI”,sans-serif;
 background:#f8fafc;
-padding:15px;
-border-radius:8px;
-overflow:auto;
-}
-
-.answer{
-margin-top:10px;
-color:#c0392b;
-font-weight:bold;
-}
-
-.favorite-btn{
-background:#f39c12;
-margin-top:15px;
-}
-
-#favorites li{
-margin-bottom:8px;
-}
-
-.notfound{
-background:white;
 padding:20px;
 border-radius:10px;
-text-align:center;
+overflow:auto;
 }
