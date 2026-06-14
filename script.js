@@ -406,6 +406,186 @@ const keywords = {
     definition: "市場メカニズムだけでは効率的な結果が得られない状態。",
     example: "環境汚染問題。",
     related: "政府介入"
+  },
+
+  "マクロ経済学": {
+    definition: "国全体の経済活動を分析する経済学分野。",
+    example: "GDPや失業率を研究する。",
+    related: "ミクロ経済学、GDP"
+  },
+
+  "ミクロ経済学": {
+    definition: "個人や企業の行動を分析する経済学分野。",
+    example: "需要と供給を研究する。",
+    related: "マクロ経済学、市場"
+  },
+
+  "総需要": {
+    definition: "経済全体で求められる財やサービスの需要総額。",
+    example: "消費や投資によって構成される。",
+    related: "総供給"
+  },
+
+  "総供給": {
+    definition: "経済全体で供給される財やサービスの総額。",
+    example: "企業の生産活動。",
+    related: "総需要"
+  },
+
+  "潜在GDP": {
+    definition: "資源を最大限活用した場合のGDP。",
+    example: "完全雇用時の生産水準。",
+    related: "GDP"
+  },
+
+  "潜在成長率": {
+    definition: "長期的に実現可能な経済成長率。",
+    example: "人口や技術進歩に左右される。",
+    related: "経済成長率"
+  },
+
+  "有効需要": {
+    definition: "実際の購買力を伴う需要。",
+    example: "ケインズ経済学の重要概念。",
+    related: "需要"
+  },
+
+  "乗数効果": {
+    definition: "支出増加が何倍もの所得増加を生む現象。",
+    example: "公共投資による景気刺激。",
+    related: "財政政策"
+  },
+
+  "ケインズ経済学": {
+    definition: "政府介入の重要性を重視する経済理論。",
+    example: "不況時の財政出動。",
+    related: "財政政策"
+  },
+
+  "古典派経済学": {
+    definition: "市場の自動調整機能を重視する経済理論。",
+    example: "自由放任主義。",
+    related: "市場"
+  },
+
+  "市場経済": {
+    definition: "価格メカニズムによって資源配分を行う経済体制。",
+    example: "日本やアメリカ。",
+    related: "計画経済"
+  },
+
+  "計画経済": {
+    definition: "政府が生産や分配を決定する経済体制。",
+    example: "旧ソ連。",
+    related: "市場経済"
+  },
+
+  "独占競争": {
+    definition: "多数の企業が差別化された商品を販売する市場。",
+    example: "飲食業界。",
+    related: "寡占"
+  },
+
+  "完全競争市場": {
+    definition: "多数の売り手と買い手が存在する市場。",
+    example: "農産物市場。",
+    related: "独占"
+  },
+
+  "限界効用": {
+    definition: "追加で1単位消費した際に得られる満足度。",
+    example: "2杯目のジュースの満足感。",
+    related: "効用"
+  },
+
+  "限界費用": {
+    definition: "追加で1単位生産するための費用。",
+    example: "追加生産コスト。",
+    related: "生産"
+  },
+
+  "限界収益": {
+    definition: "追加で1単位販売した際の収入。",
+    example: "企業の生産判断基準。",
+    related: "利益"
+  },
+
+  "効用": {
+    definition: "消費者が商品から得る満足度。",
+    example: "好きな物を食べる喜び。",
+    related: "限界効用"
+  },
+
+  "希少性": {
+    definition: "資源が有限であること。",
+    example: "土地や労働力。",
+    related: "機会費用"
+  },
+
+  "資源配分": {
+    definition: "限られた資源をどのように利用するか。",
+    example: "予算配分。",
+    related: "希少性"
+  },
+
+  "労働市場": {
+    definition: "労働力が取引される市場。",
+    example: "求人と求職。",
+    related: "失業率"
+  },
+
+  "資本市場": {
+    definition: "資金を調達・運用する市場。",
+    example: "株式市場。",
+    related: "金融市場"
+  },
+
+  "金融市場": {
+    definition: "資金が取引される市場。",
+    example: "銀行や証券市場。",
+    related: "資本市場"
+  },
+
+  "インフレ率": {
+    definition: "物価上昇の割合。",
+    example: "前年比3％。",
+    related: "インフレ、CPI"
+  },
+
+  "デフレスパイラル": {
+    definition: "デフレが景気悪化をさらに招く悪循環。",
+    example: "消費減少→生産減少→失業増加。",
+    related: "デフレ"
+  },
+
+  "フィリップス曲線": {
+    definition: "失業率とインフレ率の関係を示す理論。",
+    example: "失業率低下で物価上昇。",
+    related: "失業率、インフレ"
+  },
+
+  "国民負担率": {
+    definition: "税金や社会保険料の国民所得に占める割合。",
+    example: "日本は約40％前後。",
+    related: "租税"
+  },
+
+  "社会保障": {
+    definition: "国民生活を支える公的制度。",
+    example: "年金や医療保険。",
+    related: "財政政策"
+  },
+
+  "所得格差": {
+    definition: "所得分布の差。",
+    example: "高所得者と低所得者の差。",
+    related: "ジニ係数"
+  },
+
+  "ジニ係数": {
+    definition: "所得格差を表す指標。",
+    example: "0に近いほど平等。",
+    related: "所得格差"
   }
 };
 
