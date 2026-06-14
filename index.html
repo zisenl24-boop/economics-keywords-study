@@ -15,21 +15,13 @@
 
 <div class="container">
 
-<!-- ===================== -->
-<!-- 🔍 搜索区域 -->
-<!-- ===================== -->
+<!-- 搜索区 -->
 <div class="card">
     <h2>キーワード検索</h2>
 
     <input id="searchInput" placeholder="例：GDP、インフレ、CPI">
-
-    <!-- ⭐ 推荐：新增按钮区域 -->
     <button onclick="searchWord()">検索</button>
 
-    <!-- ⭐ ⭐ 新增：输入联想框（必须） -->
-    <div id="suggestBox"></div>
-
-    <!-- 热门词 -->
     <div class="popular">
         <span onclick="quickSearch('GDP')">GDP</span>
         <span onclick="quickSearch('CPI')">CPI</span>
@@ -38,34 +30,28 @@
     </div>
 </div>
 
-<!-- ===================== -->
-<!-- 📊 结果区 -->
-<!-- ===================== -->
+<!-- 结果 -->
 <div class="card" id="resultBox">
     <p class="notfound">検索結果がここに表示されます</p>
 </div>
 
-<!-- ===================== -->
-<!-- 🧠 Concept Map -->
-<!-- ===================== -->
+<!-- Concept Map -->
 <div class="card">
     <h2>Concept Map</h2>
 
     <div class="concept-map">
-        <div class="concept-card" onclick="quickSearch('GDP')">GDP</div>
-        <div class="concept-card" onclick="quickSearch('消費')">消費</div>
-        <div class="concept-card" onclick="quickSearch('投資')">投資</div>
-        <div class="concept-card" onclick="quickSearch('失業率')">失業率</div>
-        <div class="concept-card" onclick="quickSearch('CPI')">CPI</div>
-        <div class="concept-card" onclick="quickSearch('インフレ')">インフレ</div>
-        <div class="concept-card" onclick="quickSearch('金融政策')">金融政策</div>
-        <div class="concept-card" onclick="quickSearch('貿易')">国際貿易</div>
+        <div class="concept-card">GDP</div>
+        <div class="concept-card">消費</div>
+        <div class="concept-card">投資</div>
+        <div class="concept-card">失業率</div>
+        <div class="concept-card">CPI</div>
+        <div class="concept-card">インフレ</div>
+        <div class="concept-card">金融政策</div>
+        <div class="concept-card">国際貿易</div>
     </div>
 </div>
 
-<!-- ===================== -->
-<!-- 🗂 分类区 -->
-<!-- ===================== -->
+<!-- 分类 -->
 <div class="card">
     <h2>カテゴリ</h2>
 
@@ -77,17 +63,13 @@
     </div>
 </div>
 
-<!-- ===================== -->
-<!-- ⭐ 收藏 -->
-<!-- ===================== -->
+<!-- 收藏 -->
 <div class="card">
     <h2>お気に入り</h2>
     <ul id="favorites"></ul>
 </div>
 
-<!-- ===================== -->
-<!-- 🕒 历史 -->
-<!-- ===================== -->
+<!-- 搜索历史 -->
 <div class="card">
     <h2>検索履歴</h2>
     <ul id="historyList"></ul>

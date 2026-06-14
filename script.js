@@ -1,251 +1,337 @@
-alert("script loaded");
 const keywords = {
-    "GDP": {
-        definition: "国内総生産。一定期間に国内で生産された財・サービスの総価値。",
-        example: "日本のGDPは世界有数の規模を持つ。",
-        related: ["CPI","景気","投資"]
-    },
+  "GDP": {
+    definition: "国内総生産。一定期間内に生産された財・サービスの総価値。",
+    example: "日本の経済規模を示す指標。",
+    related: "CPI、インフレ"
+  },
 
-    "CPI": {
-        definition: "消費者物価指数。物価の変化を測る指標。",
-        example: "インフレ率の算出に利用される。",
-        related: ["インフレ","GDP"]
-    },
+  "CPI": {
+    definition: "消費者物価指数。物価水準の変化を示す指標。",
+    example: "インフレ率の計算に使われる。",
+    related: "インフレ、生活コスト"
+  },
 
-    "インフレ": {
-        definition: "物価が継続的に上昇する現象。",
-        example: "食品価格の上昇など。",
-        related: ["CPI","金融政策"]
-    },
+  "インフレ": {
+    definition: "物価が継続的に上昇する現象。",
+    example: "パンの値段が毎年上がる。",
+    related: "CPI、金融政策"
+  },
 
-    "金融政策": {
-        definition: "中央銀行による金利や通貨供給の調整。",
-        example: "日本銀行の利上げ。",
-        related: ["インフレ","金利"]
-    },
-
-    "円安": {
-        definition: "円の価値が下がる状態。",
-        example: "輸入価格が上昇する。",
-        related: ["為替","輸入","輸出"]
-    }
+  "失業率": {
+    definition: "労働人口のうち失業者の割合。",
+    example: "景気判断の重要指標。",
+    related: "GDP、景気"
+  }
 };
 
 const newsCases = {
-    "GDP":[
-        {
-            title:"日本GDP成長率",
-            summary:"日本の経済成長率に関する報道。",
-            point:"GDPは経済規模を測る代表的指標。"
-        }
-    ],
-
-    "インフレ":[
-        {
-            title:"物価上昇が続く",
-            summary:"食品やエネルギー価格が上昇。",
-            point:"インフレは家計へ影響を与える。"
-        }
-    ],
-
-    "円安":[
-        {
-            title:"円安進行",
-            summary:"ドル高による円安傾向。",
-            point:"輸入価格が上昇しやすい。"
-        }
-    ]
+  "GDP": [
+    {
+      title: "日本のGDP成長率発表",
+      summary: "政府や統計機関がGDP成長率を発表すると、景気が拡大しているのか、減速しているのかを判断する材料になる。",
+      point: "GDPは景気全体を見る代表的な指標。"
+    },
+    {
+      title: "米国GDP速報値と金融市場",
+      summary: "米国のGDP速報値が市場予想を上回ると、株価・為替・金利に影響することがある。",
+      point: "大国のGDPは世界経済にも影響しやすい。"
+    },
+    {
+      title: "中国GDPと国際貿易",
+      summary: "中国のGDP成長が鈍化すると、輸出入や資源価格を通じて他国の経済にも影響が出る場合がある。",
+      point: "GDPは国内だけでなく国際経済の分析にも使われる。"
+    }
+  ],
+  "CPI": [
+    {
+      title: "消費者物価指数の上昇",
+      summary: "CPIが上昇すると、食品・電気代・日用品などの価格上昇を通じて家計負担が大きくなる。",
+      point: "CPIは生活コストの変化を見る指標。"
+    },
+    {
+      title: "米国CPIと利上げ観測",
+      summary: "米国CPIが高い水準だと、中央銀行が利上げを続けるのではないかという見方が強まることがある。",
+      point: "CPIは金融政策の判断材料になる。"
+    },
+    {
+      title: "エネルギー価格とCPI",
+      summary: "原油や電気料金の上昇はCPIを押し上げ、インフレ率にも影響を与える。",
+      point: "CPIの中身を見ることも重要。"
+    }
+  ],
+  "インフレ": [
+    {
+      title: "物価上昇と家計への影響",
+      summary: "インフレが続くと、同じ金額で買えるものが少なくなり、実質的な購買力が下がる。",
+      point: "インフレは日常生活に直接関係する。"
+    },
+    {
+      title: "中央銀行の金融引き締め",
+      summary: "インフレを抑えるために、中央銀行が金利を引き上げる政策を取ることがある。",
+      point: "インフレと金利は深く関係している。"
+    },
+    {
+      title: "円安と輸入物価",
+      summary: "円安になると輸入品の価格が上がり、国内の物価上昇につながる場合がある。",
+      point: "為替もインフレの要因になる。"
+    }
+  ],
+  "失業率": [
+    {
+      title: "景気後退と失業率の上昇",
+      summary: "景気が悪化すると企業が採用を減らし、失業率が上がることがある。",
+      point: "失業率は景気の悪化を示すサインになる。"
+    },
+    {
+      title: "若年層の雇用問題",
+      summary: "若者の失業率が高い場合、教育・就職支援・産業構造の問題として議論されることが多い。",
+      point: "年齢別に見ると雇用問題がより具体的に分かる。"
+    },
+    {
+      title: "完全失業率と政府の雇用政策",
+      summary: "政府は失業率を見ながら、職業訓練や雇用支援などの政策を検討する。",
+      point: "失業率は政策判断にも使われる。"
+    }
+  ]
 };
-});
 
-renderFav();
-renderHistory();
-const FAVORITE_KEY = "favorites";
-const HISTORY_KEY = "history";
+const FAVORITE_KEY = "fav";
+const HISTORY_KEY = "searchHistory";
+const MAX_HISTORY_COUNT = 10;
 
-function searchWord(inputWord){
+function getStorageList(key){
+    try{
+        return JSON.parse(localStorage.getItem(key)) || [];
+    }catch(e){
+        return [];
+    }
+}
 
-    const input =
-        document.getElementById("searchInput");
+function setStorageList(key, list){
+    localStorage.setItem(key, JSON.stringify(list));
+}
 
-    const word =
-        inputWord || input.value.trim();
+function escapeHTML(text){
+    return String(text).replace(/[&<>'"]/g, function(char){
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            "'": "&#039;",
+            '"': "&quot;"
+        }[char];
+    });
+}
 
-    const data =
-        keywords[word];
+function findKeyword(input){
+    const word = String(input || "").trim();
 
-    const resultBox =
-        document.getElementById("resultBox");
-
-    if(!data){
-
-        resultBox.innerHTML =
-        `<p class="notfound">キーワードが見つかりません</p>`;
-
-        return;
+    if(keywords[word]){
+        return word;
     }
 
-    saveHistory(word);
+    const matchedWord = Object.keys(keywords).find(key =>
+        key.toLowerCase() === word.toLowerCase()
+    );
 
-    resultBox.innerHTML = `
-        <h2 class="keyword-title">${word}</h2>
-
-        <div class="section-title">
-            定義
-        </div>
-
-        <p>${data.definition}</p>
-
-        <div class="section-title">
-            例
-        </div>
-
-        <p>${data.example}</p>
-
-        <div class="section-title">
-            関連キーワード
-        </div>
-
-        <div>
-            ${data.related.map(item =>
-                `<span class="related-tag"
-                onclick="quickSearch('${item}')">
-                ${item}
-                </span>`
-            ).join("")}
-        </div>
-
-        ${renderNews(word)}
-
-        <br>
-
-        <button onclick="addFavorite('${word}')">
-            ⭐ お気に入り
-        </button>
-    `;
-}
-function quickSearch(word){
-
-    document.getElementById("searchInput").value = word;
-
-    searchWord(word);
+    return matchedWord || word;
 }
 
-function renderNews(word){
 
-    const list = newsCases[word];
+function createNewsSearchUrl(word, title){
+    const query = encodeURIComponent(`${word} ${title}`);
+    return `https://news.google.com/search?q=${query}&hl=ja&gl=JP&ceid=JP:ja`;
+}
 
-    if(!list){
-        return "";
+function renderNewsCases(word){
+    const cases = newsCases[word] || [];
+
+    if(cases.length === 0){
+        return `
+            <div class="news-section">
+                <div class="section-title">📰 ニュース事例</div>
+                <p class="empty-text">このキーワードのニュース事例はまだ登録されていません。</p>
+            </div>
+        `;
     }
 
     return `
-    <div class="news-section">
+        <div class="news-section">
+            <div class="section-title">📰 ニュース事例</div>
+            <p class="news-lead">このキーワードが実際のニュースでどのように使われるかを確認できます。</p>
 
-        <div class="section-title">
-            ニュース事例
-        </div>
-
-        <div class="news-grid">
-
-        ${list.map(news => `
-            <div class="news-card">
-
-                <h3>${news.title}</h3>
-
-                <p>${news.summary}</p>
-
-                <div class="news-point">
-                    ${news.point}
-                </div>
-
+            <div class="news-grid">
+                ${cases.map(item => `
+                    <div class="news-card">
+                        <h3>${escapeHTML(item.title)}</h3>
+                        <p>${escapeHTML(item.summary)}</p>
+                        <div class="news-point">学習ポイント：${escapeHTML(item.point)}</div>
+                        <a class="news-link" href="${createNewsSearchUrl(word, item.title)}" target="_blank" rel="noopener noreferrer">
+                            関連ニュースを探す
+                        </a>
+                    </div>
+                `).join("")}
             </div>
-        `).join("")}
 
+            <a class="latest-news-link" href="${createNewsSearchUrl(word, "")}" target="_blank" rel="noopener noreferrer">
+                「${escapeHTML(word)}」の最新ニュースをまとめて見る
+            </a>
         </div>
-
-    </div>
     `;
 }
-function addFavorite(word){
 
-    let list =
-        JSON.parse(
-            localStorage.getItem(FAVORITE_KEY)
-        ) || [];
+function searchWord(wordInput){
+    const input = document.getElementById("searchInput");
+    const rawWord = wordInput || input.value;
+    const word = findKeyword(rawWord);
+    const data = keywords[word];
+    const resultBox = document.getElementById("resultBox");
+
+    if(!String(rawWord).trim()){
+        resultBox.innerHTML = `<p class="notfound">キーワードを入力してください</p>`;
+        return;
+    }
+
+    input.value = word;
+    addHistory(word);
+
+    if(!data){
+        resultBox.innerHTML = `<p class="notfound">「${escapeHTML(word)}」は見つかりませんでした</p>`;
+        return;
+    }
+
+    const favoriteList = getStorageList(FAVORITE_KEY);
+    const isFavorite = favoriteList.includes(word);
+
+    resultBox.innerHTML = `
+        <h2 class="keyword-title">${escapeHTML(word)}</h2>
+
+        <div class="section-title">📖 定義</div>
+        <p>${escapeHTML(data.definition)}</p>
+
+        <div class="section-title">💡 例</div>
+        <p>${escapeHTML(data.example)}</p>
+
+        <div class="section-title">🔗 関連</div>
+        <div>
+            ${data.related.split("、").map(r =>
+                `<span class="related-tag">${escapeHTML(r)}</span>`
+            ).join("")}
+        </div>
+
+        ${renderNewsCases(word)}
+
+        <button class="favorite-btn" onclick="toggleFavorite('${escapeHTML(word)}')">
+            ${isFavorite ? "★ お気に入り解除" : "⭐ お気に入りに追加"}
+        </button>
+    `;
+}
+
+function quickSearch(word){
+    document.getElementById("searchInput").value = word;
+    searchWord(word);
+}
+
+function addFavorite(word){
+    let list = getStorageList(FAVORITE_KEY);
 
     if(!list.includes(word)){
         list.push(word);
     }
 
-    localStorage.setItem(
-        FAVORITE_KEY,
-        JSON.stringify(list)
-    );
-
-    renderFavorites();
+    setStorageList(FAVORITE_KEY, list);
+    renderFav();
 }
 
-function renderFavorites(){
+function removeFavorite(word){
+    let list = getStorageList(FAVORITE_KEY);
+    list = list.filter(item => item !== word);
 
-    const list =
-        JSON.parse(
-            localStorage.getItem(FAVORITE_KEY)
-        ) || [];
-
-    const box =
-        document.getElementById("favorites");
-
-    box.innerHTML =
-        list.map(item =>
-            `<li>${item}</li>`
-        ).join("");
+    setStorageList(FAVORITE_KEY, list);
+    renderFav();
 }
-function saveHistory(word){
 
-    let history =
-        JSON.parse(
-            localStorage.getItem(HISTORY_KEY)
-        ) || [];
+function toggleFavorite(word){
+    let list = getStorageList(FAVORITE_KEY);
 
-    history.unshift(word);
+    if(list.includes(word)){
+        list = list.filter(item => item !== word);
+    }else{
+        list.push(word);
+    }
 
-    history =
-        [...new Set(history)];
+    setStorageList(FAVORITE_KEY, list);
+    renderFav();
+    searchWord(word);
+}
 
-    history =
-        history.slice(0,10);
+function renderFav(){
+    const list = getStorageList(FAVORITE_KEY);
+    const favBox = document.getElementById("favorites");
 
-    localStorage.setItem(
-        HISTORY_KEY,
-        JSON.stringify(history)
-    );
+    if(!favBox){
+        return;
+    }
 
+    if(list.length === 0){
+        favBox.innerHTML = `<li class="empty-text">まだお気に入りはありません</li>`;
+        return;
+    }
+
+    favBox.innerHTML = list.map(word => `
+        <li class="saved-item">
+            <span onclick="searchWord('${escapeHTML(word)}')">${escapeHTML(word)}</span>
+            <button class="small-btn danger-btn" onclick="removeFavorite('${escapeHTML(word)}')">削除</button>
+        </li>
+    `).join("");
+}
+
+function addHistory(word){
+    let history = getStorageList(HISTORY_KEY);
+
+    history = history.filter(item => item.word !== word);
+    history.unshift({
+        word: word,
+        time: new Date().toLocaleString("ja-JP")
+    });
+    history = history.slice(0, MAX_HISTORY_COUNT);
+
+    setStorageList(HISTORY_KEY, history);
     renderHistory();
 }
 
 function renderHistory(){
+    const historyBox = document.getElementById("historyList");
+    const history = getStorageList(HISTORY_KEY);
 
-    const history =
-        JSON.parse(
-            localStorage.getItem(HISTORY_KEY)
-        ) || [];
-
-    document.getElementById("historyList").innerHTML =
-        history.map(item =>
-            `<li>${item}</li>`
-        ).join("");
-}
-
-document
-.getElementById("searchInput")
-.addEventListener("keydown",function(e){
-
-    if(e.key==="Enter"){
-        searchWord();
+    if(!historyBox){
+        return;
     }
 
+    if(history.length === 0){
+        historyBox.innerHTML = `<li class="empty-text">まだ検索履歴はありません</li>`;
+        return;
+    }
+
+    historyBox.innerHTML = history.map(item => `
+        <li class="saved-item">
+            <span onclick="searchWord('${escapeHTML(item.word)}')">${escapeHTML(item.word)}</span>
+            <small>${escapeHTML(item.time)}</small>
+        </li>
+    `).join("");
+}
+
+function clearHistory(){
+    localStorage.removeItem(HISTORY_KEY);
+    renderHistory();
+}
+
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+        searchWord();
+    }
 });
 
-renderFavorites();
+renderFav();
 renderHistory();
