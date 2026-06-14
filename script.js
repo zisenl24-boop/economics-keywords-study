@@ -1,128 +1,86 @@
 const keywords = {
+  "GDP": {
+    definition: "国内総生産。一定期間内に生産された財・サービスの総価値。",
+    example: "日本の経済規模を示す指標。",
+    related: "CPI、インフレ"
+  },
 
-    "GDP": {
-        definition: "国内総生産。一定期間内に国内で生産された財・サービスの付加価値の総額。",
-        example: "日本経済の規模を示す代表的な指標。",
-        related: "CPI、インフレ"
-    },
+  "CPI": {
+    definition: "消費者物価指数。物価水準の変化を示す指標。",
+    example: "インフレ率の計算に使われる。",
+    related: "インフレ、生活コスト"
+  },
 
-    "CPI": {
-        definition: "消費者物価指数。消費者が購入する商品やサービスの価格変動を示す指標。",
-        example: "食品やガソリン価格の上昇はCPIに反映される。",
-        related: "インフレ、GDP"
-    },
+  "インフレ": {
+    definition: "物価が継続的に上昇する現象。",
+    example: "パンの値段が毎年上がる。",
+    related: "CPI、金融政策"
+  },
 
-    "インフレ": {
-        definition: "物価が継続的に上昇する現象。",
-        example: "近年の日本では食品価格の上昇が話題となった。",
-        related: "CPI、GDP"
-    },
-
-    "デフレ": {
-        definition: "物価が継続的に下落する現象。",
-        example: "日本は長年デフレに悩まされてきた。",
-        related: "CPI"
-    },
-
-    "為替レート": {
-        definition: "異なる国の通貨を交換する際の比率。",
-        example: "1ドル＝150円は為替レートの一例。",
-        related: "円安、円高"
-    },
-
-    "円安": {
-        definition: "円の価値が外国通貨に対して下がること。",
-        example: "円安になると輸出企業に有利とされる。",
-        related: "為替レート、輸出"
-    },
-
-    "円高": {
-        definition: "円の価値が外国通貨に対して上がること。",
-        example: "円高になると輸入品が安くなる。",
-        related: "為替レート、輸入"
-    },
-
-    "WTO": {
-        definition: "世界貿易機関。国際貿易のルールを定める機関。",
-        example: "加盟国間の貿易問題を調整する。",
-        related: "FTA、関税"
-    },
-
-    "FTA": {
-        definition: "自由貿易協定。加盟国間の関税を引き下げる協定。",
-        example: "日本は多くの国とFTAを締結している。",
-        related: "WTO、EPA"
-    },
-
-    "比較優位": {
-        definition: "他国より低い機会費用で生産できる財に特化する考え方。",
-        example: "国際分業の理論的根拠となる。",
-        related: "貿易、FTA"
-    }
-
+  "失業率": {
+    definition: "労働人口のうち失業者の割合。",
+    example: "景気判断の重要指標。",
+    related: "GDP、景気"
+  }
 };
 
-function searchKeyword() {
+function searchWord(wordInput){
+    const word = wordInput || document.getElementById("searchInput").value;
+    const data = keywords[word];
 
-    const input =
-        document.getElementById("searchInput").value;
+    const resultBox = document.getElementById("resultBox");
 
-    loadKeyword(input);
-
-}
-
-function loadKeyword(word) {
-
-    const result =
-        document.getElementById("result");
-
-    const item =
-        keywords[word];
-
-    if (!item) {
-
-        result.innerHTML =
-        `
-        <div class="notfound">
-            用語が見つかりません
-        </div>
-        `;
-
+    if(!data){
+        resultBox.innerHTML = `<p class="notfound">見つかりませんでした</p>`;
         return;
     }
 
-    result.innerHTML =
-    `
-    <div class="card">
+    resultBox.innerHTML = `
+        <h2 class="keyword-title">${word}</h2>
 
-        <h2 class="keyword-title">
-            ${word}
-        </h2>
+        <div class="section-title">📖 定義</div>
+        <p>${data.definition}</p>
 
-        <h3 class="section-title">
-            定義
-        </h3>
+        <div class="section-title">💡 例</div>
+        <p>${data.example}</p>
 
-        <p>
-            ${item.definition}
-        </p>
+        <div class="section-title">🔗 関連</div>
+        <div>
+            ${data.related.split("、").map(r =>
+                `<span class="related-tag">${r}</span>`
+            ).join("")}
+        </div>
 
-        <h3 class="section-title">
-            例
-        </h3>
-
-        <p>
-            ${item.example}
-        </p>
-
-        <h3 class="section-title">
-            関連用語
-        </h3>
-
-        <p>
-            ${item.related}
-        </p>
-
-    </div>
+        <button class="favorite-btn" onclick="addFavorite('${word}')">
+            ⭐ お気に入り
+        </button>
     `;
 }
+
+function quickSearch(word){
+    document.getElementById("searchInput").value = word;
+    searchWord(word);
+}
+
+function addFavorite(word){
+    let list = JSON.parse(localStorage.getItem("fav")) || [];
+
+    if(!list.includes(word)){
+        list.push(word);
+    }
+
+    localStorage.setItem("fav", JSON.stringify(list));
+    renderFav();
+}
+
+function renderFav(){
+    let list = JSON.parse(localStorage.getItem("fav")) || [];
+
+    const favBox = document.getElementById("favorites");
+
+    favBox.innerHTML = list.map(w =>
+        `<li onclick="searchWord('${w}')">${w}</li>`
+    ).join("");
+}
+
+renderFav();
