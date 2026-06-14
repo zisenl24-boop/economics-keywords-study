@@ -1,3 +1,4 @@
+alert("JS loaded");
 const keywords = {
     "GDP": {
         definition: "国内総生産。一定期間に国内で生産された財・サービスの総価値。",
