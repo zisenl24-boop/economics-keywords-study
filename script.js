@@ -22,6 +22,217 @@ const keywords = {
     example: "景気判断の重要指標。",
     related: "GDP、景気"
   }
+  ,
+
+  "デフレ": {
+    definition: "物価が継続的に下落する現象。",
+    example: "商品の価格が長期間下がり続ける。",
+    related: "インフレ、需要"
+  },
+
+  "景気循環": {
+    definition: "景気が拡大と後退を繰り返す現象。",
+    example: "好景気と不景気が交互に訪れる。",
+    related: "GDP、失業率"
+  },
+
+  "金利": {
+    definition: "お金を借りる際の利息の割合。",
+    example: "住宅ローン金利。",
+    related: "金融政策、日本銀行"
+  },
+
+  "金融政策": {
+    definition: "中央銀行が景気や物価を調整する政策。",
+    example: "利上げや利下げ。",
+    related: "金利、日本銀行"
+  },
+
+  "日本銀行": {
+    definition: "日本の中央銀行。",
+    example: "金融政策を実施する。",
+    related: "金利、金融政策"
+  },
+
+  "財政政策": {
+    definition: "政府支出や税制を通じた経済政策。",
+    example: "公共事業の拡大。",
+    related: "租税、政府支出"
+  },
+
+  "消費税": {
+    definition: "商品やサービス購入時に課される税金。",
+    example: "日本では10％。",
+    related: "租税、財政政策"
+  },
+
+  "所得税": {
+    definition: "所得に応じて課される税金。",
+    example: "給与所得への課税。",
+    related: "租税"
+  },
+
+  "法人税": {
+    definition: "企業の利益に課される税金。",
+    example: "企業収益への課税。",
+    related: "租税、企業"
+  },
+
+  "国債": {
+    definition: "政府が発行する債券。",
+    example: "公共支出の財源。",
+    related: "財政赤字"
+  },
+
+  "財政赤字": {
+    definition: "政府支出が税収を上回る状態。",
+    example: "歳出超過。",
+    related: "国債"
+  },
+
+  "円高": {
+    definition: "円の価値が上昇すること。",
+    example: "1ドル100円から90円になる。",
+    related: "為替レート"
+  },
+
+  "円安": {
+    definition: "円の価値が下落すること。",
+    example: "1ドル100円から150円になる。",
+    related: "為替レート"
+  },
+
+  "為替レート": {
+    definition: "異なる通貨の交換比率。",
+    example: "1ドル＝150円。",
+    related: "円高、円安"
+  },
+
+  "輸出": {
+    definition: "国内の商品を海外へ販売すること。",
+    example: "自動車輸出。",
+    related: "貿易"
+  },
+
+  "輸入": {
+    definition: "海外の商品を国内へ購入すること。",
+    example: "原油輸入。",
+    related: "貿易"
+  },
+
+  "関税": {
+    definition: "輸入品に課される税金。",
+    example: "保護貿易政策。",
+    related: "輸入、自由貿易"
+  },
+
+  "自由貿易": {
+    definition: "貿易障壁を減らして行う国際取引。",
+    example: "FTAの締結。",
+    related: "関税"
+  },
+
+  "需要": {
+    definition: "商品を購入したいという欲求。",
+    example: "人気商品の需要増加。",
+    related: "供給"
+  },
+
+  "供給": {
+    definition: "商品を市場へ提供すること。",
+    example: "生産量の増加。",
+    related: "需要"
+  },
+
+  "市場均衡": {
+    definition: "需要と供給が一致する状態。",
+    example: "均衡価格の成立。",
+    related: "需要、供給"
+  },
+
+  "独占": {
+    definition: "一企業が市場を支配する状態。",
+    example: "競争相手が存在しない。",
+    related: "市場"
+  },
+
+  "寡占": {
+    definition: "少数企業が市場を支配する状態。",
+    example: "携帯電話市場。",
+    related: "独占"
+  },
+
+  "機会費用": {
+    definition: "ある選択によって失う最大の利益。",
+    example: "勉強時間とアルバイト時間。",
+    related: "選択"
+  },
+
+  "価格弾力性": {
+    definition: "価格変化に対する需要変化の割合。",
+    example: "ぜいたく品は弾力性が高い。",
+    related: "需要"
+  },
+
+  "株式": {
+    definition: "企業の所有権を表す証券。",
+    example: "株式投資。",
+    related: "株式会社"
+  },
+
+  "株価": {
+    definition: "株式の市場価格。",
+    example: "企業業績で変動する。",
+    related: "株式"
+  },
+
+  "配当": {
+    definition: "企業が株主へ分配する利益。",
+    example: "配当金。",
+    related: "株式"
+  },
+
+  "利益": {
+    definition: "売上から費用を引いた金額。",
+    example: "企業の収益。",
+    related: "売上高"
+  },
+
+  "売上高": {
+    definition: "企業が商品販売で得た収入。",
+    example: "年間売上高。",
+    related: "利益"
+  },
+
+  "固定費": {
+    definition: "生産量に関係なく発生する費用。",
+    example: "家賃。",
+    related: "コスト"
+  },
+
+  "変動費": {
+    definition: "生産量に応じて変化する費用。",
+    example: "原材料費。",
+    related: "コスト"
+  },
+
+  "スタートアップ": {
+    definition: "新しい技術や事業を展開する新興企業。",
+    example: "AI企業。",
+    related: "ベンチャー企業"
+  },
+
+  "ESG": {
+    definition: "環境・社会・ガバナンスを重視する考え方。",
+    example: "ESG投資。",
+    related: "CSR"
+  },
+
+  "DX": {
+    definition: "デジタル技術による業務改革。",
+    example: "オンライン化。",
+    related: "イノベーション"
+  }
 };
 
 const newsCases = {
