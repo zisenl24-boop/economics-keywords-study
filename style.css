@@ -175,3 +175,159 @@ box-shadow:0 5px 15px rgba(0,0,0,0.08);
 cursor:pointer;
 margin:6px 0;
 }
+
+/* favorites & history */
+#favorites,
+#historyList{
+list-style:none;
+padding-left:0;
+}
+
+.saved-item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+background:#f4f7fb;
+border-radius:12px;
+padding:12px 15px;
+margin:10px 0;
+}
+
+.saved-item span{
+cursor:pointer;
+font-weight:bold;
+color:#1f4e79;
+}
+
+.saved-item span:hover{
+text-decoration:underline;
+}
+
+.saved-item small{
+color:#777;
+font-size:12px;
+}
+
+.small-btn{
+padding:7px 12px;
+font-size:12px;
+border-radius:8px;
+}
+
+.danger-btn{
+background:#e74c3c;
+}
+
+.clear-btn{
+display:block;
+margin:15px auto 0;
+}
+
+.empty-text{
+text-align:center;
+color:#777;
+cursor:default !important;
+}
+
+@media(max-width:700px){
+    header h1{
+        font-size:48px;
+    }
+
+    header p{
+        font-size:18px;
+        padding:0 20px;
+    }
+
+    input{
+        width:100%;
+        margin-bottom:10px;
+    }
+
+    button{
+        width:100%;
+    }
+
+    .saved-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .small-btn{
+        width:auto;
+    }
+}
+
+
+/* news cases */
+.news-section{
+margin-top:25px;
+padding-top:20px;
+border-top:1px solid #e7edf5;
+}
+
+.news-lead{
+text-align:center;
+color:#666;
+margin:8px 0 18px;
+}
+
+.news-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:18px;
+margin-top:15px;
+}
+
+.news-card{
+background:#f8fbff;
+border:1px solid #d9e2ef;
+border-radius:16px;
+padding:18px;
+transition:0.3s;
+}
+
+.news-card:hover{
+transform:translateY(-4px);
+box-shadow:0 8px 18px rgba(0,0,0,0.08);
+}
+
+.news-card h3{
+color:#1f4e79;
+font-size:18px;
+margin-bottom:10px;
+}
+
+.news-card p{
+line-height:1.7;
+margin-bottom:12px;
+}
+
+.news-point{
+background:#eef5ff;
+border-left:4px solid #3a7bd5;
+padding:10px;
+border-radius:8px;
+font-size:14px;
+margin-bottom:12px;
+}
+
+.news-link,
+.latest-news-link{
+display:inline-block;
+text-decoration:none;
+font-weight:bold;
+color:#1f4e79;
+}
+
+.news-link:hover,
+.latest-news-link:hover{
+text-decoration:underline;
+}
+
+.latest-news-link{
+display:block;
+text-align:center;
+margin-top:18px;
+}
