@@ -313,17 +313,36 @@ function escapeHTML(text){
 }
 
 function findKeyword(input){
-    const word = String(input || "").trim();
+    const word = String(input || "")
+        .trim()
+        .toLowerCase();
 
-    if(keywords[word]){
-        return word;
-    }
+    const keys = Object.keys(keywords);
 
-    const matchedWord = Object.keys(keywords).find(key =>
-        key.toLowerCase() === word.toLowerCase()
+    // 1. 完全匹配（最高优先级）
+    const exact = keys.find(k =>
+        k.toLowerCase() === word
     );
+    if(exact) return exact;
 
-    return matchedWord || word;
+    // 2. 包含匹配（核心模糊搜索）
+    const includes = keys.find(k =>
+        k.toLowerCase().includes(word) ||
+        word.includes(k.toLowerCase())
+    );
+    if(includes) return includes;
+
+    // 3. 分词匹配（增强）
+    const splitMatch = keys.find(k => {
+        const keyLower = k.toLowerCase();
+        return word.split(" ").some(part =>
+            keyLower.includes(part)
+        );
+    });
+
+    if(splitMatch) return splitMatch;
+
+    return null;
 }
 
 
