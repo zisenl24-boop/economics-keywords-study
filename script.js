@@ -1,902 +1,192 @@
+// ========================
+// 📚 1. 词库系统（扩展版）
+// ========================
 const keywords = {
   "GDP": {
-    definition: "国内総生産。一定期間内に生産された財・サービスの総価値。",
-    example: "日本の経済規模を示す指標。",
-    related: "CPI、インフレ"
+    def: "国内生产总值。一个国家在一定时间内生产的所有最终产品和服务的总价值。",
+    category: "マクロ経済",
+    related: ["CPI", "インフレ", "失業率"]
   },
 
   "CPI": {
-    definition: "消費者物価指数。物価水準の変化を示す指標。",
-    example: "インフレ率の計算に使われる。",
-    related: "インフレ、生活コスト"
+    def: "消费者物价指数，用来衡量物价水平变化。",
+    category: "マクロ経済",
+    related: ["インフレ", "物価"]
   },
 
   "インフレ": {
-    definition: "物価が継続的に上昇する現象。",
-    example: "パンの値段が毎年上がる。",
-    related: "CPI、金融政策"
+    def: "物价持续上升，货币购买力下降的现象。",
+    category: "マクロ経済",
+    related: ["CPI", "金融政策"]
   },
 
   "失業率": {
-    definition: "労働人口のうち失業者の割合。",
-    example: "景気判断の重要指標。",
-    related: "GDP、景気"
-  }
-  ,
-
-  "デフレ": {
-    definition: "物価が継続的に下落する現象。",
-    example: "商品の価格が長期間下がり続ける。",
-    related: "インフレ、需要"
-  },
-
-  "景気循環": {
-    definition: "景気が拡大と後退を繰り返す現象。",
-    example: "好景気と不景気が交互に訪れる。",
-    related: "GDP、失業率"
-  },
-
-  "金利": {
-    definition: "お金を借りる際の利息の割合。",
-    example: "住宅ローン金利。",
-    related: "金融政策、日本銀行"
+    def: "劳动人口中没有工作的比例。",
+    category: "労働経済",
+    related: ["GDP", "景気"]
   },
 
   "金融政策": {
-    definition: "中央銀行が景気や物価を調整する政策。",
-    example: "利上げや利下げ。",
-    related: "金利、日本銀行"
-  },
-
-  "日本銀行": {
-    definition: "日本の中央銀行。",
-    example: "金融政策を実施する。",
-    related: "金利、金融政策"
-  },
-
-  "財政政策": {
-    definition: "政府支出や税制を通じた経済政策。",
-    example: "公共事業の拡大。",
-    related: "租税、政府支出"
-  },
-
-  "消費税": {
-    definition: "商品やサービス購入時に課される税金。",
-    example: "日本では10％。",
-    related: "租税、財政政策"
-  },
-
-  "所得税": {
-    definition: "所得に応じて課される税金。",
-    example: "給与所得への課税。",
-    related: "租税"
-  },
-
-  "法人税": {
-    definition: "企業の利益に課される税金。",
-    example: "企業収益への課税。",
-    related: "租税、企業"
-  },
-
-  "国債": {
-    definition: "政府が発行する債券。",
-    example: "公共支出の財源。",
-    related: "財政赤字"
-  },
-
-  "財政赤字": {
-    definition: "政府支出が税収を上回る状態。",
-    example: "歳出超過。",
-    related: "国債"
-  },
-
-  "円高": {
-    definition: "円の価値が上昇すること。",
-    example: "1ドル100円から90円になる。",
-    related: "為替レート"
-  },
-
-  "円安": {
-    definition: "円の価値が下落すること。",
-    example: "1ドル100円から150円になる。",
-    related: "為替レート"
-  },
-
-  "為替レート": {
-    definition: "異なる通貨の交換比率。",
-    example: "1ドル＝150円。",
-    related: "円高、円安"
-  },
-
-  "輸出": {
-    definition: "国内の商品を海外へ販売すること。",
-    example: "自動車輸出。",
-    related: "貿易"
-  },
-
-  "輸入": {
-    definition: "海外の商品を国内へ購入すること。",
-    example: "原油輸入。",
-    related: "貿易"
-  },
-
-  "関税": {
-    definition: "輸入品に課される税金。",
-    example: "保護貿易政策。",
-    related: "輸入、自由貿易"
-  },
-
-  "自由貿易": {
-    definition: "貿易障壁を減らして行う国際取引。",
-    example: "FTAの締結。",
-    related: "関税"
-  },
-
-  "需要": {
-    definition: "商品を購入したいという欲求。",
-    example: "人気商品の需要増加。",
-    related: "供給"
-  },
-
-  "供給": {
-    definition: "商品を市場へ提供すること。",
-    example: "生産量の増加。",
-    related: "需要"
-  },
-
-  "市場均衡": {
-    definition: "需要と供給が一致する状態。",
-    example: "均衡価格の成立。",
-    related: "需要、供給"
-  },
-
-  "独占": {
-    definition: "一企業が市場を支配する状態。",
-    example: "競争相手が存在しない。",
-    related: "市場"
-  },
-
-  "寡占": {
-    definition: "少数企業が市場を支配する状態。",
-    example: "携帯電話市場。",
-    related: "独占"
-  },
-
-  "機会費用": {
-    definition: "ある選択によって失う最大の利益。",
-    example: "勉強時間とアルバイト時間。",
-    related: "選択"
-  },
-
-  "価格弾力性": {
-    definition: "価格変化に対する需要変化の割合。",
-    example: "ぜいたく品は弾力性が高い。",
-    related: "需要"
-  },
-
-  "株式": {
-    definition: "企業の所有権を表す証券。",
-    example: "株式投資。",
-    related: "株式会社"
-  },
-
-  "株価": {
-    definition: "株式の市場価格。",
-    example: "企業業績で変動する。",
-    related: "株式"
-  },
-
-  "配当": {
-    definition: "企業が株主へ分配する利益。",
-    example: "配当金。",
-    related: "株式"
-  },
-
-  "利益": {
-    definition: "売上から費用を引いた金額。",
-    example: "企業の収益。",
-    related: "売上高"
-  },
-
-  "売上高": {
-    definition: "企業が商品販売で得た収入。",
-    example: "年間売上高。",
-    related: "利益"
-  },
-
-  "固定費": {
-    definition: "生産量に関係なく発生する費用。",
-    example: "家賃。",
-    related: "コスト"
-  },
-
-  "変動費": {
-    definition: "生産量に応じて変化する費用。",
-    example: "原材料費。",
-    related: "コスト"
-  },
-
-  "スタートアップ": {
-    definition: "新しい技術や事業を展開する新興企業。",
-    example: "AI企業。",
-    related: "ベンチャー企業"
-  },
-
-  "ESG": {
-    definition: "環境・社会・ガバナンスを重視する考え方。",
-    example: "ESG投資。",
-    related: "CSR"
-  },
-
-  "DX": {
-    definition: "デジタル技術による業務改革。",
-    example: "オンライン化。",
-    related: "イノベーション"
-  },
-
-  "GNP": {
-    definition: "国民総生産。国民が生産した財・サービスの総価値。",
-    example: "海外での生産活動も含まれる。",
-    related: "GDP"
-  },
-
-  "PPI": {
-    definition: "生産者物価指数。企業間取引価格の変化を示す指標。",
-    example: "原材料価格の上昇を反映する。",
-    related: "CPI、インフレ"
-  },
-
-  "好景気": {
-    definition: "経済活動が活発な状態。",
-    example: "企業収益や雇用が増加する。",
-    related: "不景気、GDP"
-  },
-
-  "不景気": {
-    definition: "経済活動が停滞している状態。",
-    example: "企業収益や消費が減少する。",
-    related: "失業率、景気"
-  },
-
-  "完全雇用": {
-    definition: "働く意思のある人がほぼ全員働ける状態。",
-    example: "失業率が非常に低い。",
-    related: "失業率"
-  },
-
-  "経済成長率": {
-    definition: "経済規模がどれだけ成長したかを示す割合。",
-    example: "前年比3％成長。",
-    related: "GDP"
-  },
-
-  "実質GDP": {
-    definition: "物価変動の影響を除いたGDP。",
-    example: "経済成長の実態を把握できる。",
-    related: "名目GDP"
-  },
-
-  "名目GDP": {
-    definition: "物価変動を含めて計算したGDP。",
-    example: "現在価格で算出される。",
-    related: "実質GDP"
-  },
-
-  "生産性": {
-    definition: "投入した資源に対する成果の割合。",
-    example: "労働生産性の向上。",
-    related: "経済成長"
-  },
-
-  "量的緩和": {
-    definition: "中央銀行が市場へ大量の資金を供給する政策。",
-    example: "景気刺激策として実施される。",
-    related: "金融政策"
-  },
-
-  "利上げ": {
-    definition: "政策金利を引き上げること。",
-    example: "インフレ抑制に利用される。",
-    related: "金利"
-  },
-
-  "利下げ": {
-    definition: "政策金利を引き下げること。",
-    example: "景気刺激に利用される。",
-    related: "金利"
-  },
-
-  "マネーサプライ": {
-    definition: "市場に流通するお金の総量。",
-    example: "中央銀行が管理する。",
-    related: "金融政策"
-  },
-
-  "政府支出": {
-    definition: "政府が行う公共サービスや事業への支出。",
-    example: "公共事業費。",
-    related: "財政政策"
-  },
-
-  "補助金": {
-    definition: "政府が特定の活動を支援するために支給する資金。",
-    example: "農業補助金。",
-    related: "財政政策"
-  },
-
-  "貿易収支": {
-    definition: "輸出額と輸入額の差額。",
-    example: "黒字または赤字となる。",
-    related: "輸出、輸入"
-  },
-
-  "経常収支": {
-    definition: "貿易や投資収益を含む国際収支。",
-    example: "日本は黒字国であることが多い。",
-    related: "貿易収支"
-  },
-
-  "FTA": {
-    definition: "自由貿易協定。",
-    example: "加盟国間の関税を削減する。",
-    related: "自由貿易"
-  },
-
-  "WTO": {
-    definition: "世界貿易機関。",
-    example: "国際貿易ルールを管理する。",
-    related: "自由貿易"
-  },
-
-  "グローバル化": {
-    definition: "国境を越えた経済活動の拡大。",
-    example: "多国籍企業の増加。",
-    related: "国際貿易"
-  },
-
-  "比較優位": {
-    definition: "他国より効率よく生産できる分野に特化する考え方。",
-    example: "国際分業の基礎理論。",
-    related: "国際分業"
-  },
-
-  "需要曲線": {
-    definition: "価格と需要量の関係を示す曲線。",
-    example: "価格が上がると需要は減少する。",
-    related: "需要"
-  },
-
-  "供給曲線": {
-    definition: "価格と供給量の関係を示す曲線。",
-    example: "価格が上がると供給は増加する。",
-    related: "供給"
-  },
-
-  "均衡価格": {
-    definition: "需要と供給が一致する価格。",
-    example: "市場均衡で成立する。",
-    related: "市場均衡"
-  },
-
-  "消費者余剰": {
-    definition: "消費者が得る利益の大きさ。",
-    example: "安く購入できた時に生じる。",
-    related: "需要"
-  },
-
-  "生産者余剰": {
-    definition: "生産者が得る利益の大きさ。",
-    example: "高く販売できた時に生じる。",
-    related: "供給"
-  },
-
-  "代替財": {
-    definition: "互いに代わりとして利用できる商品。",
-    example: "コーヒーと紅茶。",
-    related: "需要"
-  },
-
-  "補完財": {
-    definition: "一緒に利用される商品。",
-    example: "スマホと充電器。",
-    related: "需要"
-  },
-
-  "市場失敗": {
-    definition: "市場メカニズムだけでは効率的な結果が得られない状態。",
-    example: "環境汚染問題。",
-    related: "政府介入"
-  },
-
-  "マクロ経済学": {
-    definition: "国全体の経済活動を分析する経済学分野。",
-    example: "GDPや失業率を研究する。",
-    related: "ミクロ経済学、GDP"
-  },
-
-  "ミクロ経済学": {
-    definition: "個人や企業の行動を分析する経済学分野。",
-    example: "需要と供給を研究する。",
-    related: "マクロ経済学、市場"
-  },
-
-  "総需要": {
-    definition: "経済全体で求められる財やサービスの需要総額。",
-    example: "消費や投資によって構成される。",
-    related: "総供給"
-  },
-
-  "総供給": {
-    definition: "経済全体で供給される財やサービスの総額。",
-    example: "企業の生産活動。",
-    related: "総需要"
-  },
-
-  "潜在GDP": {
-    definition: "資源を最大限活用した場合のGDP。",
-    example: "完全雇用時の生産水準。",
-    related: "GDP"
-  },
-
-  "潜在成長率": {
-    definition: "長期的に実現可能な経済成長率。",
-    example: "人口や技術進歩に左右される。",
-    related: "経済成長率"
-  },
-
-  "有効需要": {
-    definition: "実際の購買力を伴う需要。",
-    example: "ケインズ経済学の重要概念。",
-    related: "需要"
-  },
-
-  "乗数効果": {
-    definition: "支出増加が何倍もの所得増加を生む現象。",
-    example: "公共投資による景気刺激。",
-    related: "財政政策"
-  },
-
-  "ケインズ経済学": {
-    definition: "政府介入の重要性を重視する経済理論。",
-    example: "不況時の財政出動。",
-    related: "財政政策"
-  },
-
-  "古典派経済学": {
-    definition: "市場の自動調整機能を重視する経済理論。",
-    example: "自由放任主義。",
-    related: "市場"
-  },
-
-  "市場経済": {
-    definition: "価格メカニズムによって資源配分を行う経済体制。",
-    example: "日本やアメリカ。",
-    related: "計画経済"
-  },
-
-  "計画経済": {
-    definition: "政府が生産や分配を決定する経済体制。",
-    example: "旧ソ連。",
-    related: "市場経済"
-  },
-
-  "独占競争": {
-    definition: "多数の企業が差別化された商品を販売する市場。",
-    example: "飲食業界。",
-    related: "寡占"
-  },
-
-  "完全競争市場": {
-    definition: "多数の売り手と買い手が存在する市場。",
-    example: "農産物市場。",
-    related: "独占"
-  },
-
-  "限界効用": {
-    definition: "追加で1単位消費した際に得られる満足度。",
-    example: "2杯目のジュースの満足感。",
-    related: "効用"
-  },
-
-  "限界費用": {
-    definition: "追加で1単位生産するための費用。",
-    example: "追加生産コスト。",
-    related: "生産"
-  },
-
-  "限界収益": {
-    definition: "追加で1単位販売した際の収入。",
-    example: "企業の生産判断基準。",
-    related: "利益"
-  },
-
-  "効用": {
-    definition: "消費者が商品から得る満足度。",
-    example: "好きな物を食べる喜び。",
-    related: "限界効用"
-  },
-
-  "希少性": {
-    definition: "資源が有限であること。",
-    example: "土地や労働力。",
-    related: "機会費用"
-  },
-
-  "資源配分": {
-    definition: "限られた資源をどのように利用するか。",
-    example: "予算配分。",
-    related: "希少性"
-  },
-
-  "労働市場": {
-    definition: "労働力が取引される市場。",
-    example: "求人と求職。",
-    related: "失業率"
-  },
-
-  "資本市場": {
-    definition: "資金を調達・運用する市場。",
-    example: "株式市場。",
-    related: "金融市場"
-  },
-
-  "金融市場": {
-    definition: "資金が取引される市場。",
-    example: "銀行や証券市場。",
-    related: "資本市場"
-  },
-
-  "インフレ率": {
-    definition: "物価上昇の割合。",
-    example: "前年比3％。",
-    related: "インフレ、CPI"
-  },
-
-  "デフレスパイラル": {
-    definition: "デフレが景気悪化をさらに招く悪循環。",
-    example: "消費減少→生産減少→失業増加。",
-    related: "デフレ"
-  },
-
-  "フィリップス曲線": {
-    definition: "失業率とインフレ率の関係を示す理論。",
-    example: "失業率低下で物価上昇。",
-    related: "失業率、インフレ"
-  },
-
-  "国民負担率": {
-    definition: "税金や社会保険料の国民所得に占める割合。",
-    example: "日本は約40％前後。",
-    related: "租税"
-  },
-
-  "社会保障": {
-    definition: "国民生活を支える公的制度。",
-    example: "年金や医療保険。",
-    related: "財政政策"
-  },
-
-  "所得格差": {
-    definition: "所得分布の差。",
-    example: "高所得者と低所得者の差。",
-    related: "ジニ係数"
-  },
-
-  "ジニ係数": {
-    definition: "所得格差を表す指標。",
-    example: "0に近いほど平等。",
-    related: "所得格差"
+    def: "中央银行通过利率等手段调控经济。",
+    category: "金融",
+    related: ["金利", "インフレ"]
+  },
+
+  "国際貿易": {
+    def: "国家之间的商品与服务交换。",
+    category: "国際経済",
+    related: ["輸出", "輸入", "為替"]
   }
 };
 
-const newsCases = {
-  "GDP": [
-    {
-      title: "日本のGDP成長率発表",
-      summary: "政府や統計機関がGDP成長率を発表すると、景気が拡大しているのか、減速しているのかを判断する材料になる。",
-      point: "GDPは景気全体を見る代表的な指標。"
-    },
-    {
-      title: "米国GDP速報値と金融市場",
-      summary: "米国のGDP速報値が市場予想を上回ると、株価・為替・金利に影響することがある。",
-      point: "大国のGDPは世界経済にも影響しやすい。"
-    },
-    {
-      title: "中国GDPと国際貿易",
-      summary: "中国のGDP成長が鈍化すると、輸出入や資源価格を通じて他国の経済にも影響が出る場合がある。",
-      point: "GDPは国内だけでなく国際経済の分析にも使われる。"
+
+// ========================
+// 🔍 2. 搜索功能
+// ========================
+function searchWord(keywordInput) {
+  const input = keywordInput || document.getElementById("searchInput").value;
+  const resultBox = document.getElementById("resultBox");
+
+  if (!input) return;
+
+  addHistory(input);
+
+  const data = keywords[input];
+
+  if (!data) {
+    resultBox.innerHTML = `<p class="notfound">該当するキーワードが見つかりません</p>`;
+    return;
+  }
+
+  resultBox.innerHTML = `
+    <h3>${input}</h3>
+    <p><strong>意味：</strong>${data.def}</p>
+    <p><strong>カテゴリ：</strong>${data.category}</p>
+    <p><strong>関連：</strong>${data.related.join("、")}</p>
+
+    <button onclick="addFavorite('${input}')">⭐ お気に入り追加</button>
+    <button onclick="showGraph('${input}')">🧠 関係図を見る</button>
+  `;
+}
+
+// ========================
+// ⚡ 快速搜索
+// ========================
+function quickSearch(word) {
+  document.getElementById("searchInput").value = word;
+  searchWord(word);
+}
+
+
+// ========================
+// ⭐ 收藏系统
+// ========================
+function addFavorite(word) {
+  let fav = JSON.parse(localStorage.getItem("favorites")) || [];
+
+  if (!fav.includes(word)) {
+    fav.push(word);
+  }
+
+  localStorage.setItem("favorites", JSON.stringify(fav));
+  renderFavorites();
+}
+
+function renderFavorites() {
+  const fav = JSON.parse(localStorage.getItem("favorites")) || [];
+  const box = document.getElementById("favorites");
+
+  box.innerHTML = fav.map(f => `<li>⭐ ${f}</li>`).join("");
+}
+
+
+// ========================
+// 📜 搜索历史
+// ========================
+function addHistory(word) {
+  let history = JSON.parse(localStorage.getItem("history")) || [];
+
+  history.unshift(word);
+
+  if (history.length > 10) history.pop();
+
+  localStorage.setItem("history", JSON.stringify(history));
+  renderHistory();
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem("history")) || [];
+  const box = document.getElementById("historyList");
+
+  box.innerHTML = history.map(h => `<li>🕒 ${h}</li>`).join("");
+}
+
+function clearHistory() {
+  localStorage.removeItem("history");
+  renderHistory();
+}
+
+
+// ========================
+// 🧠 3. 关系图系统（简易版）
+// ========================
+function showGraph(word) {
+  const box = document.getElementById("graph");
+
+  const data = keywords[word];
+
+  if (!data) {
+    box.innerHTML = "<p>関係データなし</p>";
+    return;
+  }
+
+  let html = `
+    <div class="graph-center">${word}</div>
+    <div class="graph-links">
+  `;
+
+  data.related.forEach(r => {
+    html += `<div class="graph-node" onclick="searchWord('${r}')">${r}</div>`;
+  });
+
+  html += `</div>`;
+
+  box.innerHTML = html;
+}
+
+
+// ========================
+// 💬 4. 对话系统（简易版）
+// ========================
+function sendChat() {
+  const input = document.getElementById("chatInput");
+  const chatBox = document.getElementById("chatBox");
+
+  const text = input.value;
+  if (!text) return;
+
+  chatBox.innerHTML += `<div class="user-msg">👤 ${text}</div>`;
+
+  let reply = "すみません、まだ理解できません。";
+
+  for (let key in keywords) {
+    if (text.includes(key)) {
+      reply = keywords[key].def;
+      break;
     }
-  ],
-  "CPI": [
-    {
-      title: "消費者物価指数の上昇",
-      summary: "CPIが上昇すると、食品・電気代・日用品などの価格上昇を通じて家計負担が大きくなる。",
-      point: "CPIは生活コストの変化を見る指標。"
-    },
-    {
-      title: "米国CPIと利上げ観測",
-      summary: "米国CPIが高い水準だと、中央銀行が利上げを続けるのではないかという見方が強まることがある。",
-      point: "CPIは金融政策の判断材料になる。"
-    },
-    {
-      title: "エネルギー価格とCPI",
-      summary: "原油や電気料金の上昇はCPIを押し上げ、インフレ率にも影響を与える。",
-      point: "CPIの中身を見ることも重要。"
-    }
-  ],
-  "インフレ": [
-    {
-      title: "物価上昇と家計への影響",
-      summary: "インフレが続くと、同じ金額で買えるものが少なくなり、実質的な購買力が下がる。",
-      point: "インフレは日常生活に直接関係する。"
-    },
-    {
-      title: "中央銀行の金融引き締め",
-      summary: "インフレを抑えるために、中央銀行が金利を引き上げる政策を取ることがある。",
-      point: "インフレと金利は深く関係している。"
-    },
-    {
-      title: "円安と輸入物価",
-      summary: "円安になると輸入品の価格が上がり、国内の物価上昇につながる場合がある。",
-      point: "為替もインフレの要因になる。"
-    }
-  ],
-  "失業率": [
-    {
-      title: "景気後退と失業率の上昇",
-      summary: "景気が悪化すると企業が採用を減らし、失業率が上がることがある。",
-      point: "失業率は景気の悪化を示すサインになる。"
-    },
-    {
-      title: "若年層の雇用問題",
-      summary: "若者の失業率が高い場合、教育・就職支援・産業構造の問題として議論されることが多い。",
-      point: "年齢別に見ると雇用問題がより具体的に分かる。"
-    },
-    {
-      title: "完全失業率と政府の雇用政策",
-      summary: "政府は失業率を見ながら、職業訓練や雇用支援などの政策を検討する。",
-      point: "失業率は政策判断にも使われる。"
-    }
-  ]
+  }
+
+  chatBox.innerHTML += `<div class="bot-msg">🤖 ${reply}</div>`;
+
+  input.value = "";
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+
+// ========================
+// 🧩 5. 初始化
+// ========================
+window.onload = function () {
+  renderFavorites();
+  renderHistory();
 };
-
-const FAVORITE_KEY = "fav";
-const HISTORY_KEY = "searchHistory";
-const MAX_HISTORY_COUNT = 10;
-
-function getStorageList(key){
-    try{
-        return JSON.parse(localStorage.getItem(key)) || [];
-    }catch(e){
-        return [];
-    }
-}
-
-function setStorageList(key, list){
-    localStorage.setItem(key, JSON.stringify(list));
-}
-
-function escapeHTML(text){
-    return String(text).replace(/[&<>'"]/g, function(char){
-        return {
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            "'": "&#039;",
-            '"': "&quot;"
-        }[char];
-    });
-}
-
-function findKeyword(input){
-    const word = String(input || "").trim();
-
-    if(keywords[word]){
-        return word;
-    }
-
-    const matchedWord = Object.keys(keywords).find(key =>
-        key.toLowerCase() === word.toLowerCase()
-    );
-
-    return matchedWord || word;
-}
-
-
-function createNewsSearchUrl(word, title){
-    const query = encodeURIComponent(`${word} ${title}`);
-    return `https://news.google.com/search?q=${query}&hl=ja&gl=JP&ceid=JP:ja`;
-}
-
-function renderNewsCases(word){
-    const cases = newsCases[word] || [];
-
-    if(cases.length === 0){
-        return `
-            <div class="news-section">
-                <div class="section-title">📰 ニュース事例</div>
-                <p class="empty-text">このキーワードのニュース事例はまだ登録されていません。</p>
-            </div>
-        `;
-    }
-
-    return `
-        <div class="news-section">
-            <div class="section-title">📰 ニュース事例</div>
-            <p class="news-lead">このキーワードが実際のニュースでどのように使われるかを確認できます。</p>
-
-            <div class="news-grid">
-                ${cases.map(item => `
-                    <div class="news-card">
-                        <h3>${escapeHTML(item.title)}</h3>
-                        <p>${escapeHTML(item.summary)}</p>
-                        <div class="news-point">学習ポイント：${escapeHTML(item.point)}</div>
-                        <a class="news-link" href="${createNewsSearchUrl(word, item.title)}" target="_blank" rel="noopener noreferrer">
-                            関連ニュースを探す
-                        </a>
-                    </div>
-                `).join("")}
-            </div>
-
-            <a class="latest-news-link" href="${createNewsSearchUrl(word, "")}" target="_blank" rel="noopener noreferrer">
-                「${escapeHTML(word)}」の最新ニュースをまとめて見る
-            </a>
-        </div>
-    `;
-}
-
-function searchWord(wordInput){
-    const input = document.getElementById("searchInput");
-    const rawWord = wordInput || input.value;
-    const word = findKeyword(rawWord);
-    const data = keywords[word];
-    const resultBox = document.getElementById("resultBox");
-
-    if(!String(rawWord).trim()){
-        resultBox.innerHTML = `<p class="notfound">キーワードを入力してください</p>`;
-        return;
-    }
-
-    input.value = word;
-    addHistory(word);
-
-    if(!data){
-        resultBox.innerHTML = `<p class="notfound">「${escapeHTML(word)}」は見つかりませんでした</p>`;
-        return;
-    }
-
-    const favoriteList = getStorageList(FAVORITE_KEY);
-    const isFavorite = favoriteList.includes(word);
-
-    resultBox.innerHTML = `
-        <h2 class="keyword-title">${escapeHTML(word)}</h2>
-
-        <div class="section-title">📖 定義</div>
-        <p>${escapeHTML(data.definition)}</p>
-
-        <div class="section-title">💡 例</div>
-        <p>${escapeHTML(data.example)}</p>
-
-        <div class="section-title">🔗 関連</div>
-        <div>
-            ${data.related.split("、").map(r =>
-                `<span class="related-tag">${escapeHTML(r)}</span>`
-            ).join("")}
-        </div>
-
-        ${renderNewsCases(word)}
-
-        <button class="favorite-btn" onclick="toggleFavorite('${escapeHTML(word)}')">
-            ${isFavorite ? "★ お気に入り解除" : "⭐ お気に入りに追加"}
-        </button>
-    `;
-}
-
-function quickSearch(word){
-    document.getElementById("searchInput").value = word;
-    searchWord(word);
-}
-
-function addFavorite(word){
-    let list = getStorageList(FAVORITE_KEY);
-
-    if(!list.includes(word)){
-        list.push(word);
-    }
-
-    setStorageList(FAVORITE_KEY, list);
-    renderFav();
-}
-
-function removeFavorite(word){
-    let list = getStorageList(FAVORITE_KEY);
-    list = list.filter(item => item !== word);
-
-    setStorageList(FAVORITE_KEY, list);
-    renderFav();
-}
-
-function toggleFavorite(word){
-    let list = getStorageList(FAVORITE_KEY);
-
-    if(list.includes(word)){
-        list = list.filter(item => item !== word);
-    }else{
-        list.push(word);
-    }
-
-    setStorageList(FAVORITE_KEY, list);
-    renderFav();
-    searchWord(word);
-}
-
-function renderFav(){
-    const list = getStorageList(FAVORITE_KEY);
-    const favBox = document.getElementById("favorites");
-
-    if(!favBox){
-        return;
-    }
-
-    if(list.length === 0){
-        favBox.innerHTML = `<li class="empty-text">まだお気に入りはありません</li>`;
-        return;
-    }
-
-    favBox.innerHTML = list.map(word => `
-        <li class="saved-item">
-            <span onclick="searchWord('${escapeHTML(word)}')">${escapeHTML(word)}</span>
-            <button class="small-btn danger-btn" onclick="removeFavorite('${escapeHTML(word)}')">削除</button>
-        </li>
-    `).join("");
-}
-
-function addHistory(word){
-    let history = getStorageList(HISTORY_KEY);
-
-    history = history.filter(item => item.word !== word);
-    history.unshift({
-        word: word,
-        time: new Date().toLocaleString("ja-JP")
-    });
-    history = history.slice(0, MAX_HISTORY_COUNT);
-
-    setStorageList(HISTORY_KEY, history);
-    renderHistory();
-}
-
-function renderHistory(){
-    const historyBox = document.getElementById("historyList");
-    const history = getStorageList(HISTORY_KEY);
-
-    if(!historyBox){
-        return;
-    }
-
-    if(history.length === 0){
-        historyBox.innerHTML = `<li class="empty-text">まだ検索履歴はありません</li>`;
-        return;
-    }
-
-    historyBox.innerHTML = history.map(item => `
-        <li class="saved-item">
-            <span onclick="searchWord('${escapeHTML(item.word)}')">${escapeHTML(item.word)}</span>
-            <small>${escapeHTML(item.time)}</small>
-        </li>
-    `).join("");
-}
-
-function clearHistory(){
-    localStorage.removeItem(HISTORY_KEY);
-    renderHistory();
-}
-
-const searchInput = document.getElementById("searchInput");
-searchInput.addEventListener("keydown", function(event){
-    if(event.key === "Enter"){
-        searchWord();
-    }
-});
-
-renderFav();
-renderHistory();
