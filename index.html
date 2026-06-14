@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Economics Keyword App | 経済学キーワード辞典</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Economics Keyword App</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -16,67 +15,69 @@
 
 <div class="container">
 
-    <div class="card">
-        <h2>キーワード検索</h2>
+<!-- 搜索区 -->
+<div class="card">
+    <h2>キーワード検索</h2>
 
-        <div class="search-group">
-            <input type="text" id="searchInput" placeholder="例：GDP、インフレ、CPI" onkeydown="if(event.key === 'Enter') searchWord()">
-            <button onclick="searchWord()">検索</button>
-        </div>
+    <input id="searchInput" placeholder="例：GDP、インフレ、CPI">
+    <button onclick="searchWord()">検索</button>
 
-        <div class="popular">
-            <span role="button" onclick="quickSearch('GDP')">GDP</span>
-            <span role="button" onclick="quickSearch('CPI')">CPI</span>
-            <span role="button" onclick="quickSearch('インフレ')">インフレ</span>
-            <span role="button" onclick="quickSearch('失業率')">失業率</span>
-        </div>
+    <div class="popular">
+        <span onclick="quickSearch('GDP')">GDP</span>
+        <span onclick="quickSearch('CPI')">CPI</span>
+        <span onclick="quickSearch('インフレ')">インフレ</span>
+        <span onclick="quickSearch('失業率')">失業率</span>
     </div>
+</div>
 
-    <div class="card" id="resultBox">
-        <p class="empty-text">検索結果がここに表示されます</p>
-    </div>
+<!-- 结果 -->
+<div class="card" id="resultBox">
+    <p class="notfound">検索結果がここに表示されます</p>
+</div>
 
-    <div class="card">
-        <h2>Concept Map</h2>
-        <div class="concept-map">
-            <div class="concept-card" role="button" onclick="quickSearch('GDP')">GDP</div>
-            <div class="concept-card" role="button" onclick="quickSearch('消費')">消費</div>
-            <div class="concept-card" role="button" onclick="quickSearch('投資')">投資</div>
-            <div class="concept-card" role="button" onclick="quickSearch('失業率')">失業率</div>
-            <div class="concept-card" role="button" onclick="quickSearch('CPI')">CPI</div>
-            <div class="concept-card" role="button" onclick="quickSearch('インフレ')">インフレ</div>
-            <div class="concept-card" role="button" onclick="quickSearch('金融政策')">金融政策</div>
-            <div class="concept-card" role="button" onclick="quickSearch('国際貿易')">国際貿易</div>
-        </div>
-    </div>
+<!-- Concept Map -->
+<div class="card">
+    <h2>Concept Map</h2>
 
-    <div class="card">
-        <h2>カテゴリ</h2>
-        <div class="category-grid">
-            <div class="category-card">📈 マクロ経済</div>
-            <div class="category-card">💰 金融</div>
-            <div class="category-card">🌏 国際経済</div>
-            <div class="category-card">🏭 ミクロ経済</div>
-        </div>
+    <div class="concept-map">
+        <div class="concept-card">GDP</div>
+        <div class="concept-card">消費</div>
+        <div class="concept-card">投資</div>
+        <div class="concept-card">失業率</div>
+        <div class="concept-card">CPI</div>
+        <div class="concept-card">インフレ</div>
+        <div class="concept-card">金融政策</div>
+        <div class="concept-card">国際貿易</div>
     </div>
+</div>
 
-    <div class="card">
-        <h2>お気に入り</h2>
-        <ul id="favorites">
-            <li class="empty-text">お気に入りはまだありません</li>
-        </ul>
-    </div>
+<!-- 分类 -->
+<div class="card">
+    <h2>カテゴリ</h2>
 
-    <div class="card">
-        <h2>検索履歴</h2>
-        <ul id="historyList">
-            <li class="empty-text">検索履歴はまだありません</li>
-        </ul>
-        <button class="clear-btn danger-btn" onclick="clearHistory()">履歴をクリア</button>
+    <div class="category-grid">
+        <div class="category-card">📈 マクロ経済</div>
+        <div class="category-card">💰 金融</div>
+        <div class="category-card">🌏 国際経済</div>
+        <div class="category-card">🏭 ミクロ経済</div>
     </div>
+</div>
+
+<!-- 收藏 -->
+<div class="card">
+    <h2>お気に入り</h2>
+    <ul id="favorites"></ul>
+</div>
+
+<!-- 搜索历史 -->
+<div class="card">
+    <h2>検索履歴</h2>
+    <ul id="historyList"></ul>
+    <button class="clear-btn" onclick="clearHistory()">履歴をクリア</button>
+</div>
 
 </div>
 
 <script src="script.js"></script>
 </body>
-</html>
+</html>这是index部分的
