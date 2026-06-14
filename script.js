@@ -1,86 +1,144 @@
-// ========================
-// 📚 1. 词库系统（扩展版）
-// ========================
-const keywords = {
+// ============================
+// 🧠 1. 知识图谱数据（升级版）
+// ============================
+const graph = {
   "GDP": {
-    def: "国内生产总值。一个国家在一定时间内生产的所有最终产品和服务的总价值。",
-    category: "マクロ経済",
-    related: ["CPI", "インフレ", "失業率"]
+    type: "macro",
+    def: "国内生产总值，是一个国家经济活动总量的指标。",
+    links: ["CPI", "インフレ", "失業率", "消費"],
+    importance: 5
   },
 
   "CPI": {
-    def: "消费者物价指数，用来衡量物价水平变化。",
-    category: "マクロ経済",
-    related: ["インフレ", "物価"]
+    type: "macro",
+    def: "消费者物价指数，用于衡量物价变化。",
+    links: ["インフレ", "GDP", "物価"],
+    importance: 4
   },
 
   "インフレ": {
-    def: "物价持续上升，货币购买力下降的现象。",
-    category: "マクロ経済",
-    related: ["CPI", "金融政策"]
+    type: "macro",
+    def: "物价持续上涨，货币购买力下降。",
+    links: ["CPI", "金融政策", "物価"],
+    importance: 5
   },
 
   "失業率": {
-    def: "劳动人口中没有工作的比例。",
-    category: "労働経済",
-    related: ["GDP", "景気"]
+    type: "labor",
+    def: "劳动力市场中失业人口比例。",
+    links: ["GDP", "景気", "雇用"],
+    importance: 3
   },
 
   "金融政策": {
-    def: "中央银行通过利率等手段调控经济。",
-    category: "金融",
-    related: ["金利", "インフレ"]
+    type: "finance",
+    def: "中央银行通过利率等方式调控经济。",
+    links: ["金利", "インフレ", "中央銀行"],
+    importance: 4
   },
 
   "国際貿易": {
+    type: "global",
     def: "国家之间的商品与服务交换。",
-    category: "国際経済",
-    related: ["輸出", "輸入", "為替"]
+    links: ["輸出", "輸入", "為替"],
+    importance: 4
+  },
+
+  "消費": {
+    type: "macro",
+    def: "家庭或个人购买商品和服务的行为。",
+    links: ["GDP", "需要", "所得"],
+    importance: 3
   }
 };
 
 
-// ========================
-// 🔍 2. 搜索功能
-// ========================
-function searchWord(keywordInput) {
-  const input = keywordInput || document.getElementById("searchInput").value;
-  const resultBox = document.getElementById("resultBox");
+// ============================
+// 🔍 2. 搜索系统（升级版）
+// ============================
+function searchWord(wordInput) {
+  const word = wordInput || document.getElementById("searchInput").value;
+  const box = document.getElementById("resultBox");
 
-  if (!input) return;
+  if (!word) return;
 
-  addHistory(input);
+  addHistory(word);
 
-  const data = keywords[input];
+  const key = Object.keys(graph).find(k =>
+    k === word || word.includes(k)
+  );
 
-  if (!data) {
-    resultBox.innerHTML = `<p class="notfound">該当するキーワードが見つかりません</p>`;
+  if (!key) {
+    const suggestions = Object.keys(graph)
+      .filter(k => k.includes(word))
+      .slice(0, 3);
+
+    box.innerHTML = `
+      <p class="notfound">見つかりませんでした</p>
+      <p>おすすめ：</p>
+      ${suggestions.map(s => `
+        <button onclick="searchWord('${s}')">${s}</button>
+      `).join("")}
+    `;
     return;
   }
 
-  resultBox.innerHTML = `
-    <h3>${input}</h3>
-    <p><strong>意味：</strong>${data.def}</p>
-    <p><strong>カテゴリ：</strong>${data.category}</p>
-    <p><strong>関連：</strong>${data.related.join("、")}</p>
+  const data = graph[key];
 
-    <button onclick="addFavorite('${input}')">⭐ お気に入り追加</button>
-    <button onclick="showGraph('${input}')">🧠 関係図を見る</button>
+  box.innerHTML = `
+    <h3>${key}</h3>
+    <p><strong>意味：</strong>${data.def}</p>
+    <p><strong>タイプ：</strong>${data.type}</p>
+
+    <button onclick="openGraph('${key}')">🧠 ネットワークを見る</button>
+    <button onclick="addFavorite('${key}')">⭐ お気に入り</button>
   `;
 }
 
-// ========================
+
+// ============================
 // ⚡ 快速搜索
-// ========================
+// ============================
 function quickSearch(word) {
   document.getElementById("searchInput").value = word;
   searchWord(word);
 }
 
 
-// ========================
-// ⭐ 收藏系统
-// ========================
+// ============================
+// 🧠 3. 知识图谱（真正升级版）
+// ============================
+function openGraph(center) {
+  const box = document.getElementById("graph");
+
+  const node = graph[center];
+  if (!node) {
+    box.innerHTML = "<p>データなし</p>";
+    return;
+  }
+
+  let html = `
+    <div class="net-center">${center}</div>
+    <div class="net-wrap">
+  `;
+
+  node.links.forEach(link => {
+    html += `
+      <div class="net-node" onclick="searchWord('${link}')">
+        ${link}
+      </div>
+    `;
+  });
+
+  html += `</div>`;
+
+  box.innerHTML = html;
+}
+
+
+// ============================
+// ⭐ 4. 收藏系统
+// ============================
 function addFavorite(word) {
   let fav = JSON.parse(localStorage.getItem("favorites")) || [];
 
@@ -100,14 +158,13 @@ function renderFavorites() {
 }
 
 
-// ========================
-// 📜 搜索历史
-// ========================
+// ============================
+// 📜 5. 搜索历史
+// ============================
 function addHistory(word) {
   let history = JSON.parse(localStorage.getItem("history")) || [];
 
   history.unshift(word);
-
   if (history.length > 10) history.pop();
 
   localStorage.setItem("history", JSON.stringify(history));
@@ -127,65 +184,42 @@ function clearHistory() {
 }
 
 
-// ========================
-// 🧠 3. 关系图系统（简易版）
-// ========================
-function showGraph(word) {
-  const box = document.getElementById("graph");
+// ============================
+// 💬 6. 对话系统（升级版）
+// ============================
+let chatMemory = [];
 
-  const data = keywords[word];
-
-  if (!data) {
-    box.innerHTML = "<p>関係データなし</p>";
-    return;
-  }
-
-  let html = `
-    <div class="graph-center">${word}</div>
-    <div class="graph-links">
-  `;
-
-  data.related.forEach(r => {
-    html += `<div class="graph-node" onclick="searchWord('${r}')">${r}</div>`;
-  });
-
-  html += `</div>`;
-
-  box.innerHTML = html;
-}
-
-
-// ========================
-// 💬 4. 对话系统（简易版）
-// ========================
 function sendChat() {
   const input = document.getElementById("chatInput");
-  const chatBox = document.getElementById("chatBox");
+  const box = document.getElementById("chatBox");
 
   const text = input.value;
   if (!text) return;
 
-  chatBox.innerHTML += `<div class="user-msg">👤 ${text}</div>`;
+  chatMemory.push(text);
+
+  box.innerHTML += `<div class="user-msg">👤 ${text}</div>`;
 
   let reply = "すみません、まだ理解できません。";
 
-  for (let key in keywords) {
+  for (let key in graph) {
     if (text.includes(key)) {
-      reply = keywords[key].def;
+      const data = graph[key];
+      reply = `${data.def}（関連：${data.links.join("、")}）`;
       break;
     }
   }
 
-  chatBox.innerHTML += `<div class="bot-msg">🤖 ${reply}</div>`;
+  box.innerHTML += `<div class="bot-msg">🤖 ${reply}</div>`;
 
   input.value = "";
-  chatBox.scrollTop = chatBox.scrollHeight;
+  box.scrollTop = box.scrollHeight;
 }
 
 
-// ========================
-// 🧩 5. 初始化
-// ========================
+// ============================
+// 🧩 7. 初始化
+// ============================
 window.onload = function () {
   renderFavorites();
   renderHistory();
